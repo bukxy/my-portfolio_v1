@@ -51,7 +51,4 @@
 # Embedded web-server pid file
 /.web-server-pid
 
-/front/node_modules/
 .idea
-/front/.angular
-/front/.idea
