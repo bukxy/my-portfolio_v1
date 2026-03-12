@@ -53,3 +53,5 @@
 
 /front/node_modules/
 .idea
+/front/.angular
+/front/.idea
