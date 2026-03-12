@@ -1,0 +1,19 @@
+<div class="container About-header">
+  <div class="row mb-5 mt-3 pt-md-3">
+    <div class="col-lg-8">
+      <h1 class="display-4 mb-4">Portfolio</h1>
+      <hr class="t_border my-4 ml-0 text-left" />
+    </div>
+  </div>
+  <div class="mb-5 po_items_ho">
+    @for (item of dataportfolio; track item.img) {
+      <div class="po_item">
+        <img [src]="item.img" alt="" />
+        <div class="content">
+          <p>{{ item.description }}</p>
+          <a [href]="item.link">view project</a>
+        </div>
+      </div>
+    }
+  </div>
+</div>

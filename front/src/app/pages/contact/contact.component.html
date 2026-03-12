@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row mb-5 mt-3 pt-md-3">
+    <div class="col-lg-8">
+      <h1 class="display-4 mb-4">Contact Me</h1>
+      <hr class="t_border my-4 ml-0 text-left" />
+    </div>
+  </div>
+
+  <div class="row sec_sp">
+    <div class="col-lg-12">
+      @if (formData().show) {
+        <div class="alert rounded-0 co_alert"
+             [class.alert-success]="formData().variant === 'success'"
+             [class.alert-danger]="formData().variant === 'danger'">
+          <p class="my-0">{{ formData().alertmessage }}</p>
+          <button type="button" class="btn-close" (click)="closeAlert()"></button>
+        </div>
+      }
+    </div>
+
+    <div class="col-lg-5 mb-5">
+      <h3 class="color_sec py-4">Get in touch</h3>
+      <address>
+        <strong>Email:</strong>
+        <a [href]="'mailto:' + contactConfig.YOUR_EMAIL"> {{ contactConfig.YOUR_EMAIL }}</a>
+        <br /><br />
+        @if (contactConfig.YOUR_FONE) {
+          <p><strong>Phone:</strong> {{ contactConfig.YOUR_FONE }}</p>
+        }
+      </address>
+      <p>{{ contactConfig.description }}</p>
+    </div>
+
+    <div class="col-lg-7 d-flex align-items-center">
+      <form (ngSubmit)="handleSubmit($event)" class="contact__form w-100">
+        <div class="row">
+          <div class="col-lg-6 form-group">
+            <input class="form-control"
+                   id="name" name="name"
+                   placeholder="Name"
+                   [value]="formData().name"
+                   (input)="updateField('name', $any($event.target).value)"
+                   type="text" required />
+          </div>
+          <div class="col-lg-6 form-group">
+            <input class="form-control rounded-0"
+                   id="email" name="email"
+                   placeholder="Email"
+                   type="email"
+                   [value]="formData().email"
+                   (input)="updateField('email', $any($event.target).value)"
+                   required />
+          </div>
+        </div>
+        <textarea class="form-control rounded-0"
+                  id="message" name="message"
+                  placeholder="Message"
+                  rows="5"
+                  [value]="formData().message"
+                  (input)="updateField('message', $any($event.target).value)"
+                  required></textarea>
+        <br />
+        <div class="row">
+          <div class="col-lg-12 form-group">
+            <button class="btn ac_btn" type="submit">
+              {{ formData().loading ? 'Sending...' : 'Send' }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div [class]="formData().loading ? 'loading-bar' : 'd-none'"></div>

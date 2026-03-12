@@ -1,0 +1,14 @@
+<div class="stick_follow_icon">
+  <ul>
+    @for (profile of profiles; track profile[0]) {
+      <li>
+        <a [href]="profile[1]" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path [attr.d]="getSvgPath(profile[0])"/>
+          </svg>
+        </a>
+      </li>
+    }
+  </ul>
+  <p>Follow Me</p>
+</div>

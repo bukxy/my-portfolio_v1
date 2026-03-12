@@ -1,0 +1,68 @@
+<div class="container About-header">
+  <div class="row mb-5 mt-3 pt-md-3">
+    <div class="col-lg-8">
+      <h1 class="display-4 mb-4">About me</h1>
+      <hr class="t_border my-4 ml-0 text-left" />
+    </div>
+  </div>
+
+  <div class="row sec_sp">
+    <div class="col-lg-5">
+      <h3 class="color_sec py-4">{{ dataabout.title }}</h3>
+    </div>
+    <div class="col-lg-7 d-flex align-items-center">
+      <div><p>{{ dataabout.aboutme }}</p></div>
+    </div>
+  </div>
+
+  <div class="row sec_sp">
+    <div class="col-lg-5">
+      <h3 class="color_sec py-4">Work Timeline</h3>
+    </div>
+    <div class="col-lg-7">
+      <table class="table caption-top">
+        <tbody>
+          @for (item of worktimeline; track item.jobtitle) {
+            <tr>
+              <th scope="row">{{ item.jobtitle }}</th>
+              <td>{{ item.where }}</td>
+              <td>{{ item.date }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row sec_sp">
+    <div class="col-lg-5">
+      <h3 class="color_sec py-4">Skills</h3>
+    </div>
+    <div class="col-lg-7">
+      @for (skill of skills; track skill.name) {
+        <div>
+          <h3 class="progress-title">{{ skill.name }}</h3>
+          <div class="progress">
+            <div class="progress-bar" [style.width.%]="skill.value">
+              <div class="progress-value">{{ skill.value }}%</div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="row sec_sp">
+    <div class="col-lg-5">
+      <h3 class="color_sec py-4">Services</h3>
+    </div>
+    <div class="col-lg-7">
+      @for (service of services; track service.title) {
+        <div class="service_ py-4">
+          <h5 class="service__title">{{ service.title }}</h5>
+          <p class="service_desc">{{ service.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>
