@@ -1,20 +1,51 @@
 services:
-  angular-prod:
+
+  # ── Frontend Angular ──────────────────────────────────────────────────────
+  front:
     build:
-      context: .
-      dockerfile: Dockerfile
-    image: docker-angular-sample
+      context: ..          # racine my-portfolio_v1/
+      dockerfile: docker/Dockerfile.front
+    container_name: portfolio-front
+    ports:
+      - "80:80"
+    networks:
+      - portfolio-net
+    depends_on:
+      - back
+    restart: unless-stopped
+
+  # ── Backend Java (à venir) ────────────────────────────────────────────────
+  back:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.back   # à créer quand le back sera prêt
+    container_name: portfolio-back
     ports:
       - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      # Ajoute tes variables d'env ici (DB, secrets…)
+    networks:
+      - portfolio-net
+    restart: unless-stopped
 
-  angular-dev:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - "4200:4200"
-    develop:
-      watch:
-        - action: sync
-          path: .
-          target: /app
+  # ── Base de données (optionnel, décommenter si besoin) ────────────────────
+  # db:
+  #   image: postgres:16-alpine
+  #   container_name: portfolio-db
+  #   environment:
+  #     POSTGRES_DB: portfolio
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #   volumes:
+  #     - db-data:/var/lib/postgresql/data
+  #   networks:
+  #     - portfolio-net
+  #   restart: unless-stopped
+
+networks:
+  portfolio-net:
+    driver: bridge
+
+# volumes:
+#   db-data:

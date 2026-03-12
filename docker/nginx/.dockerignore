@@ -1,0 +1,5 @@
+front/node_modules
+front/.angular
+front/dist
+front/.git
+**/*.log
