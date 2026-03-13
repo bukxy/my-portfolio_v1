@@ -1,0 +1,35 @@
+services:
+
+  # Command = docker compose -f docker-compose.dev.yaml up --build
+  # -- Frontend Angular (hot-reload) -----------------------------------------
+  front:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.dev-front
+    container_name: portfolio-front-dev
+    ports:
+      - "4200:4200"
+    volumes:
+      - ../front:/app                        # mount du code source
+      - /app/node_modules                    # évite d'écraser node_modules du conteneur
+    networks:
+      - portfolio-net
+    restart: unless-stopped
+
+  # -- Backend Java (à venir) -----------------------------------------------
+  back:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.back
+    container_name: portfolio-back-dev
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - portfolio-net
+    restart: unless-stopped
+
+networks:
+  portfolio-net:
+    driver: bridge

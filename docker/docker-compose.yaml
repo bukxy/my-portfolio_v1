@@ -1,6 +1,6 @@
 services:
 
-  # ── Frontend Angular ──────────────────────────────────────────────────────
+  # -- Frontend Angular --------------------------------------------------------
   front:
     build:
       context: ..          # racine my-portfolio_v1/
@@ -14,7 +14,7 @@ services:
       - back
     restart: unless-stopped
 
-  # ── Backend Java (à venir) ────────────────────────────────────────────────
+  # -- Backend Java (à venir) --------------------------------------------------
   back:
     build:
       context: ..
@@ -29,7 +29,7 @@ services:
       - portfolio-net
     restart: unless-stopped
 
-  # ── Base de données (optionnel, décommenter si besoin) ────────────────────
+  # -- Base de données (optionnel, décommenter si besoin) --------------------
   # db:
   #   image: postgres:16-alpine
   #   container_name: portfolio-db

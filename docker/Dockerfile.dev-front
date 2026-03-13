@@ -1,0 +1,14 @@
+# Dev uniquement – hot-reload avec ng serve
+FROM node:20-alpine
+ 
+WORKDIR /app
+ 
+COPY front/package*.json ./
+RUN npm ci
+ 
+# Le code source est monté via volume dans docker-compose.dev.yml
+# donc pas de COPY du code ici
+ 
+EXPOSE 4200
+ 
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--poll", "2000"]
