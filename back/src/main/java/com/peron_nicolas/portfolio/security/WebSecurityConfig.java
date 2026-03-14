@@ -59,8 +59,7 @@ public class WebSecurityConfig {
                                 .requestMatchers(
                                         "/swagger-ui/**",
                                         "/swagger-ui.html",
-                                        "/v3/api-docs/**",
-                                        "/v3/api-docs.yaml"
+                                        "/api-docs/**"
                                 ).permitAll()
 
                                 // Get public
