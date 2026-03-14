@@ -3,6 +3,7 @@ package com.peron_nicolas.portfolio.controller;
 import com.peron_nicolas.portfolio.entity.User;
 import com.peron_nicolas.portfolio.repository.user.UserRepository;
 import com.peron_nicolas.portfolio.security.JwtUtil;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@Hidden
 public class AuthenticationController {
 
     private AuthenticationManager authenticationManager;
