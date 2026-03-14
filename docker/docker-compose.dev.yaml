@@ -1,11 +1,10 @@
 services:
 
-  # Command = docker compose -f docker-compose.dev.yaml up --build
   # -- Frontend Angular (hot-reload) -----------------------------------------
   front:
     build:
       context: ..
-      dockerfile: docker/Dockerfile.dev-front
+      dockerfile: docker/Dockerfile.front-dev
     container_name: portfolio-front-dev
     ports:
       - "4200:4200"
@@ -16,16 +15,37 @@ services:
       - portfolio-net
     restart: unless-stopped
 
-  # -- Backend Java (à venir) -----------------------------------------------
+  # -- Backend Java (hot-reload) ----------------------------------------------
   back:
     build:
       context: ..
-      dockerfile: docker/Dockerfile.back
+      dockerfile: docker/Dockerfile.back-dev
     container_name: portfolio-back-dev
     ports:
       - "8080:8080"
+    volumes:
+      - ../back:/app                         # mount du code source
+      - /app/target                          # évite d'écraser le target du conteneur
+      - maven-cache:/root/.m2                # cache Maven persistant
     environment:
       - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/portfolio
+    networks:
+      - portfolio-net
+    restart: unless-stopped
+
+  # -- PostgreSQL ---------------------------------------------------------------
+  postgres:
+    image: postgres:16
+    container_name: portfolio-postgres-dev
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
     networks:
       - portfolio-net
     restart: unless-stopped
@@ -33,3 +53,7 @@ services:
 networks:
   portfolio-net:
     driver: bridge
+
+volumes:
+  maven-cache:
+  postgres-data:

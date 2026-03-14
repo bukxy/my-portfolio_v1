@@ -1,4 +1,4 @@
-# ─── Stage 1 : Build Angular ───────────────────────────────────────────────
+# --- Stage 1 : Build Angular -----------------------------------------------
 FROM node:20-alpine AS builder
 
 WORKDIR /app
@@ -13,7 +13,7 @@ COPY front/ .
 # Build de production
 RUN npm run build -- --configuration production
 
-# ─── Stage 2 : Serve avec Nginx ─────────────────────────────────────────────
+# --- Stage 2 : Serve avec Nginx ---------------------------------------------
 FROM nginx:1.25-alpine
 
 # Supprime la config par défaut
