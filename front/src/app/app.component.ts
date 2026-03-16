@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { filter } from 'rxjs/operators';
 import { HeaderComponent } from './components/header/header.component';
 import { SocialIconsComponent } from './components/social-icons/social-icons.component';
@@ -9,7 +9,7 @@ import { AnimatedCursorComponent } from './components/animated-cursor/animated-c
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, SocialIconsComponent, AnimatedCursorComponent],
+  imports: [RouterOutlet, HeaderComponent, SocialIconsComponent, AnimatedCursorComponent],
   template: `
     <app-animated-cursor></app-animated-cursor>
     <app-header></app-header>
