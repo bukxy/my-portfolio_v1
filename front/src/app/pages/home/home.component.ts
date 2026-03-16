@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, signal, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
-import { introdata, meta } from '../../content_option';
+import {introdata, links, meta, socialprofils} from '../../content_option';
 
 @Component({
   selector: 'app-home',
@@ -55,4 +55,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.timer = setTimeout(() => this.typeWriter(), delay);
   }
+
+    protected readonly socialprofils = socialprofils;
+  protected readonly links = links;
 }
