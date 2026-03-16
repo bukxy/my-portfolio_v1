@@ -1,7 +1,7 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Title, Meta } from '@angular/platform-browser';
-import { meta, contactConfig } from '../../content_option';
+import {meta, contactConfig, socialprofils} from '../../content_option';
 
 interface FormState {
   name: string;
@@ -23,6 +23,8 @@ interface FormState {
 export class ContactComponent implements OnInit {
   private title = inject(Title);
   private metaService = inject(Meta);
+
+  socialprofils = socialprofils;
 
   contactConfig = contactConfig;
 

@@ -1,14 +1,19 @@
-<div class="stick_follow_icon">
-  <ul>
-    @for (profile of profiles; track profile[0]) {
-      <li>
-        <a [href]="profile[1]" target="_blank" rel="noopener noreferrer">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path [attr.d]="getSvgPath(profile[0])"/>
-          </svg>
-        </a>
-      </li>
+<div class="fixed bottom-6 right-0 z-30 -translate-x-1/2 md:bottom-auto md:right-6 md:top-1/2 md:translate-x-0 md:-translate-y-1/2">
+  <div class="card-surface flex items-center gap-3 rounded-full px-4 py-3 md:flex-col md:rounded-3xl md:px-2 md:py-3">
+
+    @for (item of profiles; track item.name) {
+      <a
+        [href]="item.url"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-transparent text-base follow-link"
+        [attr.aria-label]="item.name"
+        >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 fill-current">
+          <path [attr.d]="item.icon"/>
+        </svg>
+      </a>
     }
-  </ul>
-  <p>Follow Me</p>
+
+  </div>
 </div>

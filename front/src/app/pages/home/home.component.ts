@@ -1,11 +1,10 @@
-import { Component, OnInit, OnDestroy, signal, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { Title, Meta } from '@angular/platform-browser';
+import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {Meta, Title} from '@angular/platform-browser';
 import {introdata, links, meta, socialprofils} from '../../content_option';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
   imports: [RouterLink],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']

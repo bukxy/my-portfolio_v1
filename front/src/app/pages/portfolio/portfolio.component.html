@@ -1,19 +1,52 @@
-<div class="container About-header">
-  <div class="row mb-5 mt-3 pt-md-3">
-    <div class="col-lg-8">
-      <h1 class="display-4 mb-4">Portfolio</h1>
-      <hr class="t_border my-4 ml-0 text-left" />
-    </div>
+<!--<div class="container About-header">-->
+<!--  <div class="row mb-5 mt-3 pt-md-3">-->
+<!--    <div class="col-lg-8">-->
+<!--      <h1 class="display-4 mb-4">Portfolio</h1>-->
+<!--      <hr class="t_border my-4 ml-0 text-left" />-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="mb-5 po_items_ho">-->
+<!--    @for (item of dataportfolio; track item.img) {-->
+<!--      <div class="po_item">-->
+<!--        <img [src]="item.img" alt="" />-->
+<!--        <div class="content">-->
+<!--          <p>{{ item.description }}</p>-->
+<!--          <a [href]="item.link">view project</a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    }-->
+<!--  </div>-->
+<!--</div>-->
+
+<section class="page-shell">
+  <header>
+    <meta charSet="utf-8" />
+    <title>Portfolio | {meta.title}</title>
+    <meta name="description" content={meta.description} />
+  </header>
+
+  <div class="mb-12">
+    <span class="eyebrow">Projects</span>
+    <h1 class="section-title">Portfolio</h1>
+    <div class="section-divider"></div>
   </div>
-  <div class="mb-5 po_items_ho">
-    @for (item of dataportfolio; track item.img) {
-      <div class="po_item">
-        <img [src]="item.img" alt="" />
-        <div class="content">
-          <p>{{ item.description }}</p>
-          <a [href]="item.link">view project</a>
+
+  <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+    @for (item of dataportfolio; track $index) {
+      <article [accessKey]="$index" class="card-surface overflow-hidden">
+        <img [src]="item.img" [alt]="item.description" class="h-64 w-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
+        <div class="space-y-4 p-6">
+          <p class="leading-7 text-[var(--text-muted)]">{{item.description}}</p>
+          <a
+            [href]="item.link"
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex items-center text-sm font-semibold project-link"
+          >
+            View project
+          </a>
         </div>
-      </div>
+      </article>
     }
   </div>
-</div>
+</section>

@@ -1,9 +1,14 @@
-<header class="fixed-top site__header">
-  <div class="d-flex align-items-center justify-content-between">
-    <a class="navbar-brand nav_ac" routerLink="/">{{ logotext }}</a>
-    <div class="d-flex align-items-center">
-      <app-theme-toggle></app-theme-toggle>
-      <button class="menu__button nav_ac" (click)="toggleMenu()">
+<header class="fixed inset-x-0 top-0 z-40 px-4 pt-4 md:px-6">
+  <div class="mx-auto flex max-w-6xl items-center justify-between rounded-full border border-[var(--border-color)] bg-[var(--surface-color)]/80 px-4 py-3 shadow-soft backdrop-blur md:px-6">
+    <a (click)="closeMenu()" class="font-display text-xl tracking-[0.35em] md:text-2xl" routerLink="/">{{ logotext }}</a>
+    <div class="flex items-center gap-3">
+            <app-theme-toggle></app-theme-toggle>
+      <button
+        type="button"
+        aria-label="Toggle menu"
+        (click)="toggleMenu()"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border-color)] bg-[var(--surface-color)] text-xl transition hover:border-[var(--text-color)]"
+      >
         @if (isMenuOpen()) {
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         } @else {
@@ -12,34 +17,40 @@
       </button>
     </div>
   </div>
+</header>
 
-  <div class="site__navigation" [class.menu__opend]="isMenuOpen()">
-    <div class="bg__menu h-100">
-      <div class="menu__wrapper">
-        <div class="menu__container p-3">
-          <ul class="the_menu">
-            <li class="menu_item">
-              <a routerLink="/" (click)="closeMenu()" class="my-3">Accueil</a>
-            </li>
-            <li class="menu_item">
-              <a routerLink="/portfolio" (click)="closeMenu()" class="my-3">Mes projets</a>
-            </li>
-            <li class="menu_item">
-              <a routerLink="/about" (click)="closeMenu()" class="my-3">A propos</a>
-            </li>
-            <li class="menu_item">
-              <a routerLink="/contact" (click)="closeMenu()" class="my-3">Contact</a>
-            </li>
-          </ul>
-        </div>
+<div
+  class="fixed inset-0 z-30 transition"
+  [class.pointer-events-auto]="isMenuOpen()"
+  [class.opacity-100]="isMenuOpen()"
+  [class.pointer-events-none]="!isMenuOpen()"
+  [class.opacity-0]="!isMenuOpen()"
+>
+  <div class="absolute inset-0 bg-[var(--overlay-color)] backdrop-blur-md" (click)="closeMenu()"></div>
+  <div class="relative mx-auto flex min-h-screen max-w-6xl flex-col justify-between px-6 pb-8 pt-28 md:px-10 md:pt-36">
+    <nav class="card-surface px-6 py-8 md:px-10 md:py-12">
+      <ul class="space-y-4 md:space-y-6">
+        @for (item of navItems; track item) {
+          <li class="text-3xl md:text-5xl hover:text-[var(--accent-color)]"
+              [routerLink]="item[0]"
+              (click)="closeMenu()"
+              routerLinkActive="text-[var(--color-red)]"
+              [routerLinkActiveOptions]="{ exact: true }"
+          >
+              {{item[1]}}
+          </li>
+        }
+      </ul>
+    </nav>
+    <div class="flex flex-col gap-6 text-sm text-[var(--text-muted)] md:flex-row md:items-center md:justify-between">
+      <div class="flex flex-wrap gap-4">
+        @for (item of socialprofils; track item) {
+          <a [href]="item.url" target="_blank" rel="noopener noreferrer" class="social-link">
+            {{item.name}}
+          </a>
+        }
       </div>
-    </div>
-    <div class="menu_footer d-flex flex-column flex-md-row justify-content-between align-items-md-center position-absolute w-100 p-3">
-      <div class="d-flex">
-        <a [href]="socialprofils.linkedin">Linkedin</a>
-        <a [href]="socialprofils.github">Github</a>
-      </div>
-      <p class="copyright m-0">copyright __ {{ logotext }}</p>
+      <p>copyright — {{logotext}}</p>
     </div>
   </div>
-</header>
+</div>
