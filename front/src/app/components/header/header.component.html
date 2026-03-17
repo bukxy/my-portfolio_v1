@@ -2,23 +2,25 @@
   <div class="mx-auto flex max-w-6xl items-center justify-between rounded-full border border-[var(--border-color)] bg-[var(--surface-color)]/80 px-4 py-3 shadow-soft backdrop-blur md:px-6">
     <a (click)="closeMenu()" class="font-display text-xl tracking-[0.35em] md:text-2xl" routerLink="/">{{ logotext }}</a>
     <div class="flex items-center gap-3">
-            <app-theme-toggle></app-theme-toggle>
+      <app-login></app-login>
+      <app-theme-toggle></app-theme-toggle>
       <button
         type="button"
         aria-label="Toggle menu"
         (click)="toggleMenu()"
-        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border-color)] bg-[var(--surface-color)] text-xl transition hover:border-[var(--text-color)]"
+        class="flex items-center justify-center"
       >
         @if (isMenuOpen()) {
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <mat-icon style="font-size: 32px; width: 32px; height: 32px;">close</mat-icon>
+<!--          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>-->
         } @else {
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <mat-icon style="font-size: 32px; width: 24px; height: 32px;">menu</mat-icon>
+<!--          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>-->
         }
       </button>
     </div>
   </div>
 </header>
-
 <div
   class="fixed inset-0 z-30 transition"
   [class.pointer-events-auto]="isMenuOpen()"
