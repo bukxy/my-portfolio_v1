@@ -4,11 +4,12 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
 import {ThemeToggleComponent} from '../theme-toggle/theme-toggle.component';
 import {logotext, socialprofils} from '../../content_option';
 import {Login} from '../../dialogs/login/login';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, ThemeToggleComponent, RouterLinkActive, Login],
+  imports: [RouterLink, ThemeToggleComponent, RouterLinkActive, Login, MatIcon],
   templateUrl: './header.component.html',
   styles: [`
     button {
