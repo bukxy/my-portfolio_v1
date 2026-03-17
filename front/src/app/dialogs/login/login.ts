@@ -5,7 +5,6 @@ import {MatIcon, MatIconModule} from '@angular/material/icon';
 import {FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatChipTrailingIcon} from '@angular/material/chips';
 
 export interface DialogData {
   animal: string;
@@ -22,7 +21,7 @@ export interface DialogData {
       <mat-icon style="font-size: 24px; width: 24px; height: 24px;">fingerprint</mat-icon>
     </button>
   `,
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatChipTrailingIcon, MatIcon],
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`
     button {
@@ -53,7 +52,6 @@ export class Login {
     MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, FormsModule, ReactiveFormsModule
   ],
   templateUrl: './login.html',
-  styleUrl: './login.css',
 })
 export class LoginForm {
   readonly dialogRef = inject(MatDialogRef<LoginForm>);
