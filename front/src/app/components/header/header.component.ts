@@ -1,15 +1,24 @@
-import { Component, signal, inject } from '@angular/core';
+import {Component, signal} from '@angular/core';
 
 import {RouterLink, RouterLinkActive} from '@angular/router';
-import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
-import { logotext, socialprofils } from '../../content_option';
+import {ThemeToggleComponent} from '../theme-toggle/theme-toggle.component';
+import {logotext, socialprofils} from '../../content_option';
+import {Login} from '../../dialogs/login/login';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, ThemeToggleComponent, RouterLinkActive],
+  imports: [RouterLink, ThemeToggleComponent, RouterLinkActive, Login],
   templateUrl: './header.component.html',
-  styleUrls: []
+  styles: [`
+    button {
+      transition: color 0.2s;
+    }
+
+    button:hover {
+      color: var(--accent-color) !important;
+    }
+  `]
 })
 export class HeaderComponent {
 
@@ -19,7 +28,6 @@ export class HeaderComponent {
     ["/about", "About"],
     ["/contact", "Contact"],
   ];
-
 
   logotext = logotext;
   socialprofils = socialprofils;
