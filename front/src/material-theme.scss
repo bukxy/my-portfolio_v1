@@ -5,6 +5,48 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
+:root {
+  @include mat.dialog-overrides((
+    container-color: var(--bg-color),
+  ));
+
+  @include mat.form-field-overrides((
+    filled-container-color: var(--bg-color),
+    outlined-focus-outline-color: var(--bg-color),
+    outlined-hover-outline-color: var(--bg-color),
+
+    filled-input-text-color: var(--text-color),
+    filled-label-text-color: var(--text-muted),
+    filled-focus-label-text-color: var(--text-muted),
+
+    filled-active-indicator-color: var(--border-color),
+    filled-focus-active-indicator-color: var(--border-color),
+    filled-hover-active-indicator-color: var(--border-color),
+
+    container-vertical-padding: 5px,
+    container-height: 30px,
+
+    filled-input-text-placeholder-color: var(--text-muted),
+
+    filled-caret-color: var(--text-color),
+
+    filled-container-shape: 100%
+  ));
+  //block w-full rounded-md bg-[var(--bg-color)] px-3 py-1.5 text-base text-[var(--text-color)] outline-1 -outline-offset-1 outline-[var(--border-color)] placeholder:text-[var(--text-muted)] focus:outline-2 focus:-outline-offset-2 focus:outline-[var(--border-color)] sm:text-sm/6
+}
+
+.mdc-text-field--filled {
+  border-radius: 6px !important;
+  outline: 1px solid var(--border-color);
+
+  &:focus-within {
+    outline: 2px solid var(--border-color);
+  }
+}
+.mdc-line-ripple {
+  display: none;
+}
+
 //html {
 //  height: 100%;
 //  @include mat.theme(
