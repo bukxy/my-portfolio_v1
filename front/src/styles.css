@@ -45,7 +45,7 @@ body {
 
 * {
   box-sizing: border-box;
-  cursor: none !important;
+  /*cursor: none !important;*/
 }
 
 a {
@@ -139,5 +139,9 @@ img {
 
   .field {
     @apply w-full rounded-2xl border border-[var(--border-color)] bg-transparent px-4 py-3 text-sm text-[var(--text-color)] outline-none transition placeholder:text-[var(--text-muted)] focus:border-[var(--accent-color)] focus:ring-2;
+  }
+
+  .cdk-overlay-dark-backdrop {
+    background: rgba(0,0,0,.8) !important;
   }
 }
