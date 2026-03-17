@@ -6,7 +6,11 @@ import {socialprofils} from '../../content_option';
   standalone: true,
   templateUrl: './social-icons.component.html',
   imports: [],
-  styleUrls: ['./social-icons.component.css']
+  styles: [`
+    .follow-link:hover svg path {
+        fill: var(--color-red);
+    }
+  `]
 })
 export class SocialIconsComponent {
   profiles = socialprofils;
