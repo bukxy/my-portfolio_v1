@@ -17,7 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
-@Slf4j
+@Slf4j // log.
 public class AuthTokenFilter extends OncePerRequestFilter {
 
     public static final String BEARER_ = "Bearer ";
