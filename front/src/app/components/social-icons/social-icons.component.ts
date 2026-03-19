@@ -8,7 +8,7 @@ import {socialprofils} from '../../content_option';
   imports: [],
   styles: [`
     .follow-link:hover svg path {
-        fill: var(--color-red);
+        fill: var(--color-error);
     }
   `]
 })
