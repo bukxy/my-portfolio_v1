@@ -1,11 +1,15 @@
-package com.peron_nicolas.portfolio.controller;
+package com.peron_nicolas.portfolio.api;
 
 import com.peron_nicolas.portfolio.entity.User;
-import com.peron_nicolas.portfolio.repository.user.UserRepository;
+import com.peron_nicolas.portfolio.repository.UserRepository;
 import com.peron_nicolas.portfolio.security.JwtUtil;
 import io.swagger.v3.oas.annotations.Hidden;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,42 +21,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/auth")
 @Hidden
-public class AuthenticationController {
+@RequiredArgsConstructor
+public class AuthenticationResource {
 
-    private AuthenticationManager authenticationManager;
-    private UserRepository userRepository;
-    private PasswordEncoder encoder;
-    private JwtUtil jwtUtils;
-
-    @Autowired
-    public AuthenticationController(
-            AuthenticationManager authenticationManager,
-            UserRepository userRepository,
-            PasswordEncoder encoder,
-            JwtUtil jwtUtils
-    ) {
-        this.authenticationManager = authenticationManager;
-        this.userRepository = userRepository;
-        this.encoder = encoder;
-        this.jwtUtils = jwtUtils;
-    }
+    private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
+    private final PasswordEncoder encoder;
+    private final JwtUtil jwtUtils;
 
     @PostMapping("/signin")
-    public String authenticateUser(@RequestBody User user) {
+    public ResponseEntity<JwtUtil.AuthResponse> authenticateUser(@RequestBody User user) {
         Authentication authentication = authenticationManager.authenticate(
-                new org.springframework.security.authentication.UsernamePasswordAuthenticationToken(
+                new UsernamePasswordAuthenticationToken(
                         user.getUsername(),
                         user.getPassword()
                 )
         );
-        final UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return jwtUtils.generateToken(userDetails.getUsername());
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        return ResponseEntity.ok(jwtUtils.generateToken(userDetails.getUsername()));
     }
 
+    // Bloque la création d'un compte utilisateur, car pas besoin :)
     @PostMapping("/signup")
-    public String registerUser(@RequestBody User user) {
+    public ResponseEntity<String> registerUser(@RequestBody User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
-            return "Error: Username is already taken!";
+            return ResponseEntity.badRequest().build();
         }
 
         final User newUser = new User(
@@ -61,6 +54,6 @@ public class AuthenticationController {
                 encoder.encode(user.getPassword())
         );
         userRepository.save(newUser);
-        return "User registred successfully !";
+        return ResponseEntity.ok("User registered successfully!");
     }
 }
