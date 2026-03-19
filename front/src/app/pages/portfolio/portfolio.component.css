@@ -1,5 +1,5 @@
 .project-link {
-  color: var(--color-red);
+  color: var(--color-error);
 }
 
 .project-link:hover {
