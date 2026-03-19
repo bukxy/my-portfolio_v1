@@ -3,7 +3,10 @@ package com.peron_nicolas.portfolio.api;
 import com.peron_nicolas.portfolio.entity.User;
 import com.peron_nicolas.portfolio.repository.UserRepository;
 import com.peron_nicolas.portfolio.security.JwtUtil;
+import com.peron_nicolas.portfolio.tools.MessageTool;
 import io.swagger.v3.oas.annotations.Hidden;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -19,10 +22,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/auth")
 @Hidden
 @RequiredArgsConstructor
 public class AuthenticationResource {
@@ -32,8 +36,11 @@ public class AuthenticationResource {
     private final PasswordEncoder encoder;
     private final JwtUtil jwtUtils;
 
+    private final MessageTool messageTool;
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody User user, HttpServletResponse response) {
+        System.out.println("Attempting to authenticate user: " + user.getUsername());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         user.getUsername(),
@@ -53,7 +60,7 @@ public class AuthenticationResource {
 
         response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
-        return ResponseEntity.ok(Map.of("success", true));
+        return ResponseEntity.ok(Map.of("message", messageTool.set("auth.success.logged.in.message")));
     }
 
     // Bloque la création d'un compte utilisateur, car pas besoin :)
@@ -73,7 +80,16 @@ public class AuthenticationResource {
 //    }
 
     @PostMapping("/signout")
-    public ResponseEntity<?> signout(HttpServletResponse response) {
+    public ResponseEntity<?> signout(HttpServletRequest request, HttpServletResponse response) {
+
+        Cookie[] cookies = request.getCookies();
+        boolean hasToken = cookies != null && Arrays.stream(cookies)
+                .anyMatch(c -> c.getName().equals("accessToken"));
+
+        if (!hasToken) {
+            return ResponseEntity.badRequest().body(Map.of("message", messageTool.set("auth.already.logged.out.message")));
+        }
+
         ResponseCookie cookie = ResponseCookie.from("accessToken", "")
                 .httpOnly(true)
                 .path("/")
@@ -81,6 +97,6 @@ public class AuthenticationResource {
                 .build();
 
         response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
-        return ResponseEntity.ok(Map.of("success", true));
+        return ResponseEntity.ok(Map.of("message", messageTool.set("auth.success.logged.out.message")));
     }
 }
