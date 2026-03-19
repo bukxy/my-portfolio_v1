@@ -32,7 +32,6 @@
 
     filled-container-shape: 100%
   ));
-  //block w-full rounded-md bg-[var(--bg-color)] px-3 py-1.5 text-base text-[var(--text-color)] outline-1 -outline-offset-1 outline-[var(--border-color)] placeholder:text-[var(--text-muted)] focus:outline-2 focus:-outline-offset-2 focus:outline-[var(--border-color)] sm:text-sm/6
 }
 
 .mdc-text-field--filled {
@@ -46,6 +45,61 @@
 .mdc-line-ripple {
   display: none;
 }
+
+button[mat-flat-button][type="submit"] {
+  width: 100%;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color 0.2s, color 0.2s;
+
+  @include mat.button-overrides((
+    filled-container-color: var(--border-color),
+    filled-label-text-color: var(--text-color),
+    filled-container-shape: var(--border-radius),
+    filled-disabled-container-color: var(--border-color),
+    filled-disabled-label-text-color: var(--text-muted),
+  ));
+
+  &:hover:not(:disabled) {
+    background-color: var(--text-muted) !important;
+    color: var(--bg-color) !important;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--text-muted) !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/*
+ SNACKBAR
+ */
+mat-snack-bar-container {
+  font-weight: 500;
+  background-color: var(--secondary-color) !important;
+  color: var(--text-color) !important;
+  border-radius: var(--border-radius) !important;
+}
+
+.success-snackbar {
+  color: var(--color-success) !important;
+}
+
+.error-snackbar {
+  color: var(--color-error) !important;
+}
+
+.warning-snackbar {
+  color: var(--color-warning) !important;
+}
+
+.default-snackbar {
+  color: var(--color-info) !important;
+}
+/*
+ SNACKBAR
+ */
 
 //html {
 //  height: 100%;
