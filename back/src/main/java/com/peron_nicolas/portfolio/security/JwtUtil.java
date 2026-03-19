@@ -30,7 +30,7 @@ public class JwtUtil {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public record AuthResponse(@JsonProperty("access_token") String jwtToken) {}
+    public record AuthResponse(@JsonProperty("access_token") String jwtToken, @JsonProperty("refresh_token") String jwtRefreshToken) {}
     /*
     Remplace
     ----------
@@ -46,8 +46,13 @@ public class JwtUtil {
         }
     }
      */
+    public AuthResponse generateTokens(String username) {
+        String accessToken = generateAccessToken(username);  // 15min
+        String refreshToken = generateRefreshToken(username); // 7 jours
+        return new AuthResponse(accessToken, refreshToken);
+    }
 
-    public AuthResponse generateToken(String username) {
+    public String generateAccessToken(String username) {
         String token = Jwts.builder()
                 .subject(username)
                 .issuedAt(new Date())
@@ -55,7 +60,18 @@ public class JwtUtil {
                 .signWith(key)
                 .compact();
 
-        return new AuthResponse(token);
+        return token;
+    }
+
+    private String generateRefreshToken(String username) {
+        String token = Jwts.builder()
+                .subject(username)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
+                .signWith(key)
+                .compact();
+
+        return token;
     }
 
     public String getUserFromToken(String token) {
