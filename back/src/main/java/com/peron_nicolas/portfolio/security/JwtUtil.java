@@ -26,18 +26,36 @@ public class JwtUtil {
     @PostConstruct
     public void init() {
 //        this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
-        byte[] keyBytes = Decoders.BASE64.decode(jwtSecret); // ✅ décode le Base64
+        byte[] keyBytes = Decoders.BASE64.decode(jwtSecret);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateToken(String username) {
-        return Jwts.builder()
+    public record AuthResponse(String jwtToken) {}
+    /*
+    Remplace
+    ----------
+    public class AuthResponse {
+        private final String jwtToken;
+
+        public AuthResponse(String jwtToken) {
+            this.jwtToken = jwtToken;
+        }
+
+        public String getJwtToken() {
+            return jwtToken;
+        }
+    }
+     */
+
+    public AuthResponse generateToken(String username) {
+        String token = Jwts.builder()
                 .subject(username)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(key)
                 .compact();
 
+        return new AuthResponse(token);
     }
 
     public String getUserFromToken(String token) {
