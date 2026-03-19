@@ -11,7 +11,12 @@
   --accent-color: #ef4444;
   --border-color: rgba(255, 255, 255, 0.12);
   --overlay-color: rgba(12, 12, 12, 0.65);
-  --color-red: rgba(205, 46, 54, 1);
+  --color-error: rgba(205, 46, 54, 1);
+  --color-success: rgb(45, 164, 23, 1);
+  --color-info: rgba(14, 187, 202, 1);
+  --color-warning: rgb(220, 122, 15, 1);
+
+  --border-radius: 6px;
 }
 
 [data-theme="light"] {
@@ -25,7 +30,6 @@
   --accent-color: #dc2626;
   --border-color: rgba(17, 17, 17, 0.12);
   --overlay-color: rgba(255, 255, 255, 0.72);
-  --color-red: rgba(205, 46, 54, 1)
 }
 
 html,
@@ -59,7 +63,7 @@ img {
 }
 
 .social-link:hover {
-  color: var(--color-red);
+  color: var(--color-error);
 }
 
 .ovhidden {
