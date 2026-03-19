@@ -3,7 +3,6 @@ package com.peron_nicolas.portfolio.security;
 import com.peron_nicolas.portfolio.service.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
-@Slf4j // log.
+@Slf4j
 public class AuthTokenFilter extends OncePerRequestFilter {
 
     public static final String BEARER_ = "Bearer ";
@@ -56,27 +55,16 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     }
 
     private String parseJwt(HttpServletRequest request) {
-//        String headerAuth = request.getHeader("Authorization");
-//        String token = headerAuth.substring(BEARER_.length());
 
-        if (request.getCookies() != null) {
-            for (Cookie cookie : request.getCookies()) {
-                if ("accessToken".equals(cookie.getName())) {
-                    return cookie.getValue();
-                }
+        String headerAuth = request.getHeader("Authorization");
+
+        if (headerAuth != null && headerAuth.startsWith(BEARER_)) {
+            String token = headerAuth.substring(BEARER_.length());
+
+            if (token.split("\\.").length == 3) {
+                return token;
             }
         }
-//
-//        if (token.startsWith("{")) {
-//            ObjectMapper mapper = new ObjectMapper();
-//            System.out.println("Token: " + token);
-//            return mapper.readTree(token).get("access_token").asText();
-//        }
-//
-//        System.out.println("Header auth: " + headerAuth);
-//        if (headerAuth != null && headerAuth.startsWith(BEARER_)) {
-//            return headerAuth.substring(BEARER_.length());
-//        }
         return null;
     }
 }
