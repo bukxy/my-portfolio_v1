@@ -74,7 +74,7 @@ public class WebSecurityConfig {
                 )
                 .authorizeHttpRequests(a ->
                         a
-                                .requestMatchers("/api/v1/auth/**").permitAll() // Auth public
+                                .requestMatchers("/auth/**").permitAll() // Auth public
 
                                 // Swagger : public
                                 .requestMatchers(
@@ -84,10 +84,10 @@ public class WebSecurityConfig {
                                 ).permitAll()
 
                                 // Get public
-                                .requestMatchers(HttpMethod.GET, "/api/v1/projects/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/v1/skills/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/v1/experiences/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/v1/about/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/project/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/skill/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/experience/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/about/**").permitAll()
 
                                 // Let others methods with authentication (POST/PUT/DELETE)
                                 .anyRequest().authenticated()
