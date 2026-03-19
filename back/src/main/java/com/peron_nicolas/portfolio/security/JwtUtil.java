@@ -1,5 +1,6 @@
 package com.peron_nicolas.portfolio.security;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -30,7 +31,7 @@ public class JwtUtil {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public record AuthResponse(String jwtToken) {}
+    public record AuthResponse(@JsonProperty("access_token") String jwtToken) {}
     /*
     Remplace
     ----------
