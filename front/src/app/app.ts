@@ -5,6 +5,8 @@ import {SocialIconsComponent} from './components/social-icons/social-icons.compo
 import {HeaderComponent} from './components/header/header.component';
 import {filter} from 'rxjs';
 import {Dialog} from '@angular/cdk/dialog';
+import {AuthService} from './services/jwt-token/auth-service';
+import {RequesterService} from './services/requester/requester-service';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +18,9 @@ export class App implements OnInit{
   protected readonly title = signal('test');
   protected readonly dialog = inject(Dialog);
   protected readonly router = inject(Router);
+
+  private authService = inject(AuthService);
+  private request = inject(RequesterService);
 
   ngOnInit() {
     // Besoin pour remettre le cursor au dessus des dialog --'
@@ -37,5 +42,17 @@ export class App implements OnInit{
     ).subscribe(() => {
       window.scrollTo(0, 0);
     });
+
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (isLoggedIn) {
+      this.request.post<{ access_token: string }>('auth/refresh', null, true)
+      .subscribe({
+        next: (res) => this.authService.setAccessToken(res.access_token),
+        error: () => {
+          this.authService.removeAccessToken();
+          localStorage.removeItem('isLoggedIn');
+        }
+      });
+    }
   }
 }

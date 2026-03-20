@@ -1,15 +1,15 @@
-import {ChangeDetectionStrategy, Component, inject, model, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatIcon, MatIconModule} from '@angular/material/icon';
-import {FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
+import {LoginResponse} from '../../interfaces/login-interface';
+import {RequesterService} from '../../services/requester/requester-service';
+import {AuthService} from '../../services/jwt-token/auth-service';
+import {SnackBarCall} from '../../services/snack-bar/snack-bar';
+import {DataModel} from '../../interfaces/data-model-interface';
 
 /**
  * @title Dialog Overview
@@ -17,9 +17,16 @@ export interface DialogData {
 @Component({
   selector: 'app-login',
   template: `
-    <button mat-icon-button (click)="openDialog()" class="flex items-center justify-center">
-      <mat-icon style="font-size: 24px; width: 24px; height: 24px;">fingerprint</mat-icon>
-    </button>
+    @if (authService.isAuthenticated()) {
+      <button mat-icon-button (click)="openDialog()" class="flex items-center justify-center">
+        <mat-icon style="font-size: 24px; width: 24px; height: 24px;">check</mat-icon>
+      </button>
+    } @else {
+      <button mat-icon-button (click)="openDialog()" class="flex items-center justify-center">
+        <mat-icon style="font-size: 24px; width: 24px; height: 24px;">fingerprint</mat-icon>
+      </button>
+    }
+
   `,
   imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,6 +45,7 @@ export interface DialogData {
 })
 export class Login {
   readonly dialog = inject(MatDialog);
+  authService = inject(AuthService);
 
   openDialog(): void {
     this.dialog.open(LoginForm, {
@@ -53,20 +61,46 @@ export class Login {
   ],
   templateUrl: './login.html',
 })
-export class LoginForm {
+export class LoginForm{
   readonly dialogRef = inject(MatDialogRef<LoginForm>);
-  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
-  readonly animal = model(this.data.animal);
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  readonly username = new FormControl('', [Validators.required]);
+  readonly request = inject(RequesterService);
+  readonly authService = inject(AuthService);
+  private snackBar = inject(SnackBarCall);
 
   hide = signal(true);
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
     event.stopPropagation();
+  }
+
+  // LOGIN FORM REQUEST
+  protected readonly loginFormGroup= new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+  })
+
+  login() {
+    if(this.loginFormGroup.valid) {
+      this.request.post<LoginResponse>('auth/signin', this.loginFormGroup.value, true)
+        .subscribe({
+          next: (res) => {
+            this.snackBar.showSuccessMessage(res.message)
+            this.authService.setAccessToken(res.access_token)
+            this.dialogRef.close();
+          },
+          error: (err) => this.snackBar.showErrorMessage(err.error.message),
+        });
+      }
+  }
+
+  logout() {
+    this.request.post<DataModel>('auth/signout', null, true)
+    .subscribe({
+      next: (res) => {
+        this.snackBar.showSuccessMessage(res.message)
+        this.authService.removeAccessToken()
+      },
+      error: (err) => this.snackBar.showErrorMessage(err.error.message),
+    });
   }
 }
