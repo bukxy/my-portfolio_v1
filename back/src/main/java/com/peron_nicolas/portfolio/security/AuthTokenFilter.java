@@ -61,7 +61,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             String token =  headerAuth.substring(BEARER_.length());
             if (request.getCookies() != null) {
                 for (Cookie cookie : request.getCookies()) {
-                    if ("accessToken".equals(cookie.getName())) {
+                    if ("access_token".equals(cookie.getName())) {
                         return cookie.getValue();
                     }
                 }
