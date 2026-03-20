@@ -9,6 +9,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -43,6 +44,9 @@ public class AuthenticationResource {
     @Value("${cookie.secure}")
     private boolean cookieSecure;
 
+    @Value("${jwt.refresh-token-path}")
+    private String refreshTokenPath;
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody User user, HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(
@@ -57,7 +61,7 @@ public class AuthenticationResource {
                 .httpOnly(true)
                 .secure(cookieSecure)       // false en local, true en prod
                 .sameSite("Strict")
-                .path("/api/v1/auth/refresh")
+                .path(refreshTokenPath)
                 .domain(cookieDomain)
                 .maxAge(60 * 60 * 24 * 7)
                 .build();
@@ -92,10 +96,14 @@ public class AuthenticationResource {
         boolean hasToken = cookies != null && Arrays.stream(cookies)
                 .anyMatch(c -> c.getName().equals("refresh_token"));
 
-        if (hasToken) {
+        if (!hasToken)
+            return ResponseEntity.badRequest().body(Map.of("message", messageTool.set("auth.already.logged.out.message")));
+        else {
             ResponseCookie cookie = ResponseCookie.from("refresh_token", "")
                     .httpOnly(true)
-                    .path("/")
+                    .secure(cookieSecure)
+                    .path(refreshTokenPath)
+                    .domain(cookieDomain)
                     .maxAge(0)
                     .build();
 
@@ -107,8 +115,13 @@ public class AuthenticationResource {
         ));
     }
 
-    @GetMapping("/refresh")
-    public ResponseEntity<?> refresh(HttpServletRequest request, HttpServletResponse response) {
+    @PostMapping("/refresh")
+    public ResponseEntity<?> refresh(HttpServletRequest request) {
+        if (request.getCookies() == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("message", messageTool.set("auth.already.logged.out.message")));
+        }
+
         String refreshToken = Arrays.stream(request.getCookies())
                 .filter(c -> c.getName().equals("refresh_token"))
                 .findFirst()
