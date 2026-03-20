@@ -10,6 +10,7 @@ import {RequesterService} from '../../services/requester/requester-service';
 import {SnackBarCall} from '../../services/snack-bar/snack-bar';
 import {DataModel} from '../../interfaces/data-model-interface';
 import {AuthService} from '../../services/auth/auth-service';
+import {MatTooltip} from '@angular/material/tooltip';
 
 /**
  * @title Dialog Overview
@@ -18,17 +19,22 @@ import {AuthService} from '../../services/auth/auth-service';
   selector: 'app-login',
   template: `
     @if (authService.isAuthenticated()) {
-      <button mat-icon-button (click)="openDialog()" class="flex items-center justify-center">
-        <mat-icon style="font-size: 24px; width: 24px; height: 24px;">check</mat-icon>
+      <button mat-icon-button (click)="logout()" class="flex items-center justify-center"
+              #tooltip="matTooltip"
+              matTooltip="Logout !"
+      >
+        <mat-icon style="font-size: 24px; width: 24px; height: 24px;">logout</mat-icon>
       </button>
     } @else {
-      <button mat-icon-button (click)="openDialog()" class="flex items-center justify-center">
+      <button mat-icon-button (click)="openDialog()" class="flex items-center justify-center"
+              #tooltip="matTooltip"
+              matTooltip="Login ^^"
+      >
         <mat-icon style="font-size: 24px; width: 24px; height: 24px;">fingerprint</mat-icon>
       </button>
     }
-
   `,
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIcon],
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIcon, MatTooltip],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`
     button {
@@ -45,11 +51,24 @@ import {AuthService} from '../../services/auth/auth-service';
 })
 export class Login {
   readonly dialog = inject(MatDialog);
-  authService = inject(AuthService);
+  readonly authService = inject(AuthService);
+  readonly request = inject(RequesterService);
+  private snackBar = inject(SnackBarCall);
 
   openDialog(): void {
     this.dialog.open(LoginForm, {
       data: {name: null, animal: null},
+    });
+  }
+
+  logout() {
+    this.request.post<DataModel>('auth/signout', null, true)
+    .subscribe({
+      next: (res) => {
+        this.snackBar.showSuccessMessage(res.message)
+        this.authService.removeAccessToken()
+      },
+      error: (err) => this.snackBar.showErrorMessage(err.error.message),
     });
   }
 }
@@ -91,16 +110,5 @@ export class LoginForm{
           error: (err) => this.snackBar.showErrorMessage(err.error.message),
         });
       }
-  }
-
-  logout() {
-    this.request.post<DataModel>('auth/signout', null, true)
-    .subscribe({
-      next: (res) => {
-        this.snackBar.showSuccessMessage(res.message)
-        this.authService.removeAccessToken()
-      },
-      error: (err) => this.snackBar.showErrorMessage(err.error.message),
-    });
   }
 }
