@@ -4,6 +4,7 @@
 // Learn more about theming and how to use it for your application's
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
+@use 'ngx-scrollbar' as scrollbar;
 
 :root {
   @include mat.dialog-overrides((
@@ -31,6 +32,21 @@
     filled-caret-color: var(--text-color),
 
     filled-container-shape: 100%
+  ));
+
+  @include mat.tooltip-overrides((
+    container-color: var(--secondary-color),
+    container-shape: var(--border-radius),
+    supporting-text-color: var(--bg-color),
+  ));
+
+  @include scrollbar.ng-scrollbar-overrides((
+    track-color: color-mix(in srgb, var(--accent-color) 10%, transparent),
+    thumb-color: color-mix(in srgb, var(--accent-color) 40%, transparent),
+    track-thickness: 18px,
+    track-shape: var(--border-radius),
+    thumb-min-size: 5px,
+    track-offset: 5px,
   ));
 }
 

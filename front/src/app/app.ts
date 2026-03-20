@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {afterNextRender, Component, inject, OnInit, signal} from '@angular/core';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {AnimatedCursorComponent} from './components/animated-cursor/animated-cursor.component';
 import {SocialIconsComponent} from './components/social-icons/social-icons.component';
@@ -7,10 +7,11 @@ import {filter} from 'rxjs';
 import {Dialog} from '@angular/cdk/dialog';
 import {RequesterService} from './services/requester/requester-service';
 import {AuthService} from './services/auth/auth-service';
+import {NgScrollbarDocument, NgScrollbarModule} from 'ngx-scrollbar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AnimatedCursorComponent, HeaderComponent, SocialIconsComponent],
+  imports: [RouterOutlet, AnimatedCursorComponent, HeaderComponent, SocialIconsComponent, NgScrollbarModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -21,6 +22,15 @@ export class App implements OnInit{
 
   private authService = inject(AuthService);
   private request = inject(RequesterService);
+
+  scrollbarDocument = inject(NgScrollbarDocument);
+  constructor() {
+    afterNextRender({
+      earlyRead: () => {
+        this.scrollbarDocument.attachScrollbar();
+      }
+    });
+  }
 
   ngOnInit() {
     // Besoin pour remettre le cursor au dessus des dialog --'
