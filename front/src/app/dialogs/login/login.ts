@@ -7,9 +7,9 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {LoginResponse} from '../../interfaces/login-interface';
 import {RequesterService} from '../../services/requester/requester-service';
-import {AuthService} from '../../services/jwt-token/auth-service';
 import {SnackBarCall} from '../../services/snack-bar/snack-bar';
 import {DataModel} from '../../interfaces/data-model-interface';
+import {AuthService} from '../../services/auth/auth-service';
 
 /**
  * @title Dialog Overview

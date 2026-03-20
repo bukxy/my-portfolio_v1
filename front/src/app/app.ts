@@ -5,8 +5,8 @@ import {SocialIconsComponent} from './components/social-icons/social-icons.compo
 import {HeaderComponent} from './components/header/header.component';
 import {filter} from 'rxjs';
 import {Dialog} from '@angular/cdk/dialog';
-import {AuthService} from './services/jwt-token/auth-service';
 import {RequesterService} from './services/requester/requester-service';
+import {AuthService} from './services/auth/auth-service';
 
 @Component({
   selector: 'app-root',

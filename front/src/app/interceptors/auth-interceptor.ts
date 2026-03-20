@@ -1,8 +1,7 @@
-// auth.interceptor.ts
 import {HttpInterceptorFn, HttpRequest, HttpHandlerFn, HttpClient} from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, switchMap, throwError } from 'rxjs';
-import {AuthService} from '../services/jwt-token/auth-service';
+import {AuthService} from '../services/auth/auth-service';
 
 export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   const authService = inject(AuthService);
