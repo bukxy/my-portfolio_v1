@@ -1,10 +1,18 @@
+
+<button
+  mat-flat-button
+  (click)="logout()"
+>
+  Logout
+</button>
+
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-[var(--bg-color)] border-1 border-[var(--border-color)]">
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <h2 class="text-center text-2xl/9 font-bold tracking-tight text-[var(--text-color)]">Connexion</h2>
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form action="#" method="POST">
+    <form [formGroup]="loginFormGroup" method="POST" (ngSubmit)="login()">
       <div>
         <label for="username" class="block text-sm/6 font-medium text-[var(--text-muted)] mb-2">
           Identifiant
@@ -13,7 +21,7 @@
           <input
             id="username"
             matInput
-            [formControl]="username"
+            formControlName="username"
             required
           />
         </mat-form-field>
@@ -24,7 +32,12 @@
           Mot de passe
         </label>
         <mat-form-field>
-          <input matInput id="password" [type]="hide() ? 'password' : 'text'" />
+          <input
+            matInput
+            id="password"
+            [type]="hide() ? 'password' : 'text'"
+            formControlName="password"
+          />
           <button
             matIconButton
             matSuffix
@@ -39,7 +52,13 @@
       </div>
 
       <div>
-        <button type="submit" class="flex w-full justify-center rounded-md bg-[var(--border-color)] px-3 py-1.5 text-sm/6 font-semibold text-[var(--text-color)] hover:bg-[var(--text-muted)] hover:text-[var(--bg-color)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--text-muted)] ">Essayer ✌️</button>
+        <button
+          mat-flat-button
+          type="submit"
+          [disabled]="! loginFormGroup.valid"
+        >
+          Essayer ✌️
+        </button>
       </div>
     </form>
   </div>
