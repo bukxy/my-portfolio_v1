@@ -1,4 +1,4 @@
-export interface DataModel {
+export interface DataModel<T = any> {
   message: string;
-  data: string[];
+  data: T;
 }
