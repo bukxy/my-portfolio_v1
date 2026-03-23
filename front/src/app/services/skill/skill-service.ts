@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {Subject} from 'rxjs';
+import {map, Subject} from 'rxjs';
 import {DataModel} from '../../interfaces/data-model-interface';
 import {FormGroup} from '@angular/forms';
 import {RequesterService} from '../requester/requester-service';
@@ -14,21 +14,22 @@ export class SkillService {
   onRefresh$ = this.refresh$.asObservable();
 
   readonly request = inject(RequesterService);
-  private snackBar = inject(SnackBarCall);
 
   triggerRefresh() {
     this.refresh$.next();
   }
 
   getAll() {
-    return this.request.get<SkillsInterface>('skill');
+    return this.request.get<DataModel<SkillsInterface>>('skill').pipe(
+      map(res => res.data)
+    )
   }
 
   add(formGroup: FormGroup) {
-    return this.request.post<DataModel>('skill', formGroup.value);
+    return this.request.post<DataModel<SkillInterface>>('skill', formGroup.value);
   }
 
   update(id: number, formGroup: FormGroup) {
-    return this.request.put<DataModel>(`skill/${id}`, formGroup.value);
+    return this.request.put<DataModel<SkillInterface>>(`skill/${id}`, formGroup.value);
   }
 }
