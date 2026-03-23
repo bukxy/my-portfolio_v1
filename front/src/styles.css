@@ -107,6 +107,46 @@ img {
   transition: all 300ms ease-out;
 }
 
+/*
+Icons CRUD
+ */
+.small-icon {
+  font-size: 16px; width: 16px; height: 16px;
+}
+.small-icon .mat-mdc-button-touch-target {
+  width: 28px !important;
+  height: 28px !important;
+}
+.small-icon.mat-mdc-icon-button {
+  width: 28px !important;
+  height: 28px !important;
+  line-height: 28px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.small-icon .mat-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.cdk-global-scrollblock {
+  padding-right: 0 !important;
+  top: auto !important;
+  position: static !important;
+  overflow: hidden !important;
+}
+
+.error-icon {
+  font-size: 16px !important;
+  width: 16px !important;
+  height: 16px !important;
+  color: color-mix(in srgb, var(--accent-color) 70%, transparent) !important;
+  vertical-align: middle;
+}
+
 @layer components {
   .app-shell {
     @apply min-h-screen bg-[var(--bg-color)] text-[var(--text-color)];

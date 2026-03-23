@@ -62,7 +62,7 @@
   display: none;
 }
 
-button[mat-flat-button][type="submit"] {
+button[mat-flat-button] {
   width: 100%;
   border-radius: 6px;
   font-size: 0.875rem;
@@ -70,12 +70,26 @@ button[mat-flat-button][type="submit"] {
   transition: background-color 0.2s, color 0.2s;
 
   @include mat.button-overrides((
-    filled-container-color: var(--border-color),
-    filled-label-text-color: var(--text-color),
     filled-container-shape: var(--border-radius),
     filled-disabled-container-color: var(--border-color),
     filled-disabled-label-text-color: var(--text-muted),
   ));
+
+  &[type="submit"] {
+    @include mat.button-overrides((
+      filled-container-color: var(--border-color),
+      filled-label-text-color: var(--text-color),
+    ));
+  }
+
+  &[mat-dialog-close] {
+    @include mat.button-overrides((
+      filled-container-color: var(--accent-color),
+      filled-label-text-color: var(--text-color),
+    ));
+
+    margin-left: 0 !important;
+  }
 
   &:hover:not(:disabled) {
     background-color: var(--text-muted) !important;
