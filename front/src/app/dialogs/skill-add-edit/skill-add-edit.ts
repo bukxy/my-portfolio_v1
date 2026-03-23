@@ -74,7 +74,7 @@ export class SkillAddEditDialog {
 })
 export class SkillAddEditForm {
   readonly data = inject(MAT_DIALOG_DATA);
-
+  readonly isEdit: boolean;
   private snackBar = inject(SnackBarCall);
   private skillService = inject(SkillService);
 
@@ -84,8 +84,8 @@ export class SkillAddEditForm {
       Validators.max(100)]),
   });
 
-  get isEdit() {
-    return !!this.data?.id;
+  constructor() {
+    this.isEdit = !!this.data?.id;
   }
 
   backendErrors = signal<Record<string, string>>({});
