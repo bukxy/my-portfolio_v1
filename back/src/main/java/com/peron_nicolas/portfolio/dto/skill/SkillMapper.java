@@ -22,7 +22,7 @@ public class SkillMapper {
 
     // Entity -> DTO (response)
     public SkillDTO toDto(Skill skill) {
-        return new SkillDTO(skill.getName(), skill.getPercentage().byteValue());
+        return new SkillDTO(skill.getId(), skill.getName(), skill.getPercentage().byteValue());
     }
 
     public List<SkillDTO> toDto(List<Skill> skills) {
