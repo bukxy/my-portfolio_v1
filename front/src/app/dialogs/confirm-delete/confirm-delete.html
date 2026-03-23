@@ -1,0 +1,25 @@
+<div class="bg-[var(--bg-color)] px-6 py-8 border-1 border-[var(--border-color)]">
+  <h2 mat-dialog-title class="!text-xl !font-bold !tracking-tight !text-[var(--text-color)]">
+    Confirmation de suppression
+  </h2>
+
+  <mat-dialog-content>
+    <p class="text-sm text-[var(--text-muted)]">
+      Supprimer : <span class="text-[var(--text-color)] font-medium">{{ data.info }}</span>
+    </p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="space-y-4">
+    <button
+      mat-flat-button
+      type="submit"
+      cdkFocusInitial
+      (click)="delete()"
+    >
+      Supprimer
+    </button>
+    <button mat-flat-button mat-dialog-close>
+      Annuler
+    </button>
+  </mat-dialog-actions>
+</div>
