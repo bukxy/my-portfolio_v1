@@ -1,0 +1,69 @@
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-[var(--bg-color)] border-1 border-[var(--border-color)]">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <h2 class="text-center text-2xl/9 font-bold tracking-tight text-[var(--text-color)]">Ajout d'une competence</h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form [formGroup]="skillFormGroup" method="POST" (ngSubmit)="submit()">
+      <div>
+        <label for="name" class="block text-sm/6 font-medium text-[var(--text-muted)] mb-2">
+          Nom de la competence
+          @if (backendErrors()['name']) {
+            <mat-icon
+              #tooltip="matTooltip"
+              matTooltip="{{ backendErrors()['name'] }}"
+              class="error-icon"
+            >
+              info
+            </mat-icon>
+          }
+        </label>
+        <mat-form-field class="w-full">
+          <input
+            id="name"
+            matInput
+            formControlName="name"
+            type="text"
+            required
+          />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <label for="percentage" class="block text-sm/6 font-medium text-[var(--text-muted)] mb-2">
+          Pourcentage
+          @if (backendErrors()['percentage']) {
+            <mat-icon
+              #tooltip="matTooltip"
+              matTooltip="{{ backendErrors()['percentage'] }}"
+              class="error-icon"
+            >
+              info
+            </mat-icon>
+          }
+        </label>
+        <mat-form-field class="w-full">
+          <input
+            id="percentage"
+            matInput
+            formControlName="percentage"
+            type="number"
+            required
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="space-y-4">
+        <button
+          mat-flat-button
+          type="submit"
+        >
+          Ajouter
+        </button>
+        <button mat-flat-button mat-dialog-close>
+          Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
