@@ -22,7 +22,7 @@ export class RequesterService {
     return this.httpClient.put<T>(environment.apiURL + url, params);
   }
 
-  delete(url: string, params?: any): Observable<Object> {
-    return this.httpClient.delete(environment.apiURL + url, params);
+  delete<T>(urlWithId: string): Observable<T> {
+    return this.httpClient.delete<T>(environment.apiURL + urlWithId);
   }
 }
