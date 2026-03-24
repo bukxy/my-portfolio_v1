@@ -43,7 +43,7 @@ public class OpenApiConfig {
                         .addResponses("404", new ApiResponse()
                                 .description(messageSource.getMessage("handler.error.not.found", null, Locale.getDefault())))
                         .addResponses("401", new ApiResponse()
-                                .description(messageSource.getMessage("handler.error.forbidden", null, Locale.getDefault())))
+                                .description(messageSource.getMessage("handler.error.unauthorized", null, Locale.getDefault())))
                         .addResponses("500", new ApiResponse()
                                 .description(messageSource.getMessage("handler.error.internal.server", null, Locale.getDefault())))
                         .addResponses("409", new ApiResponse()
