@@ -143,7 +143,7 @@ public class AuthenticationResource {
     public ResponseEntity<?> me(Authentication authentication) {
         if (authentication == null)
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("message", messageTool.set("auth.not.logged.in.message")));
+                    .body(Map.of("message", messageTool.set("handler.error.unauthorized")));
 
         return ResponseEntity.ok(Map.of("username", authentication.getName()));
     }
