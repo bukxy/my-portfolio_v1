@@ -31,7 +31,6 @@ public class SkillResource {
     private final SkillServiceInterface skillServiceInterface;
 
     private final MessageTool messageTool;
-    private final SkillMapper skillMapper;
 
     private final SkillMapper mapper;
 
@@ -40,23 +39,23 @@ public class SkillResource {
         Skill skill = mapper.toEntity(request);
 
         return messageTool.res(HttpStatus.CREATED,
-                skillMapper.toDto(skillServiceInterface.save(skill)),
+                mapper.toDto(skillServiceInterface.save(skill)),
                 "crud.success.created.message", "Skill"
         );
     }
 
     @GetMapping
     public ResponseEntity<?> list() {
-        return messageTool.res(HttpStatus.CREATED,
-                skillMapper.toDto((List<Skill>) skillServiceInterface.findAll()),
+        return messageTool.res(HttpStatus.OK,
+                mapper.toDto((List<Skill>) skillServiceInterface.findAll()),
                 "crud.success.retrieved.message", "Skill"
         );
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> get(@PathVariable Long id) {
-        return messageTool.res(HttpStatus.CREATED,
-                skillMapper.toDto(skillServiceInterface.getById(id)),
+        return messageTool.res(HttpStatus.OK,
+                mapper.toDto(skillServiceInterface.getById(id)),
                 "crud.success.retrieved.message", "Skill"
         );
     }
@@ -66,7 +65,7 @@ public class SkillResource {
         System.out.println("Received: " + request);
         Skill skill = mapper.toEntity(request, skillServiceInterface.getById(id));
         return messageTool.res(HttpStatus.OK,
-                skillMapper.toDto(skillServiceInterface.save(skill)),
+                mapper.toDto(skillServiceInterface.save(skill)),
                 "crud.success.updated.message", "Skill"
         );
     }
