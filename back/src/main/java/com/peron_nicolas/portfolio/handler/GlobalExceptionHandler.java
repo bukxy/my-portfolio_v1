@@ -99,6 +99,9 @@ public class GlobalExceptionHandler {
             case INTERNAL_SERVER_ERROR -> {
                 message = messageTool.set("handler.error.internal.server");
             }
+            case UNAUTHORIZED -> {
+                message = messageTool.set("handler.error.unauthorized");
+            }
             default -> {
                 message = messageTool.set("handler.error.bad.request");
             }
