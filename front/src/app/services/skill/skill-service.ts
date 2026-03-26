@@ -32,4 +32,8 @@ export class SkillService {
   update(id: number, formGroup: FormGroup) {
     return this.request.put<DataModel<SkillInterface>>(`skill/${id}`, formGroup.value);
   }
+
+  delete(id: number) {
+    return this.request.delete(`skill/${id}`);
+  }
 }
