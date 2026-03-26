@@ -107,7 +107,7 @@ export class LoginForm{
             this.authService.setAccessToken(res.access_token)
             this.dialogRef.close();
           },
-          error: (err) => this.snackBar.showErrorMessage(err.error.message),
+          error: (err) => this.snackBar.showErrorMessage("Mauvaise combinaison mon 🐰"),
         });
       }
   }
