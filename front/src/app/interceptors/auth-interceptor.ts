@@ -9,14 +9,17 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
   const http = inject(HttpClient);
   const token = authService.getAccessToken();
 
+  // Ignore routes (block loop refresh request after login fail)
+  const isAuthRoute = req.url.includes('auth/signin') ||
+    req.url.includes('auth/refresh');
+
   const authReq = token
     ? req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`) })
     : req;
 
   return next(authReq).pipe(
     catchError(err => {
-      console.log(err.status);
-      if (err.status === 401) {
+      if (err.status === 401 && !isAuthRoute) {
         return http.post<{ access_token: string }>(
           environment.apiURL + 'auth/refresh',
           null,
