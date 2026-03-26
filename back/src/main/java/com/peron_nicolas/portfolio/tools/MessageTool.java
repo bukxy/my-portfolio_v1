@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -20,9 +21,9 @@ public class MessageTool {
     }
 
     public ResponseEntity<?> res(HttpStatus HttpStatusCode, Object data, String messageKey, Object... args) {
-        return ResponseEntity.status(HttpStatusCode).body(Map.of(
-                "message", messageSource.getMessage(messageKey, args, LocaleContextHolder.getLocale()),
-                "data", data
-        ));
+        Map<String, Object> body = new HashMap<>();
+        body.put("message", set(messageKey, args));
+        body.put("data", data);
+        return ResponseEntity.status(HttpStatusCode).body(body);
     }
 }
