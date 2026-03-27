@@ -22,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -50,6 +51,8 @@ public class FileSystemStorageService implements FileSystemStorageServiceInterfa
                 throw new StorageException("Failed to store empty file.");
             }
 
+            validateFile(file);
+
             String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
             String filename = UUID.randomUUID() + "." + extension;
 
@@ -66,7 +69,7 @@ public class FileSystemStorageService implements FileSystemStorageServiceInterfa
                         StandardCopyOption.REPLACE_EXISTING);
             }
 
-            return imageServiceInterface.save(load(filename.toString()).toString(),entityTypeEnum, entityId);
+            return imageServiceInterface.save("uploads/" + filename, entityTypeEnum, entityId);
         }
         catch (IOException e) {
             throw new StorageException("Failed to store file.", e);
@@ -122,6 +125,17 @@ public class FileSystemStorageService implements FileSystemStorageServiceInterfa
         }
         catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);
+        }
+    }
+
+    private void validateFile(MultipartFile file) {
+        String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+        if (extension == null) {
+            throw new StorageException("File has no extension.");
+        }
+        List<String> allowed = List.of("jpg", "jpeg", "png", "webp");
+        if (!allowed.contains(extension.toLowerCase())) {
+            throw new StorageException("File type not allowed: " + extension);
         }
     }
 }
