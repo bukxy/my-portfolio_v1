@@ -1,0 +1,71 @@
+<div class="flex flex-col bg-[var(--bg-color)] border-1 border-[var(--border-color)]">
+  <ng-scrollbar style="height: calc(100vh - 80px)">
+
+    @if (data.images?.length) {
+      <div class="relative h-64 flex-shrink-0 overflow-hidden">
+        <img
+          [src]="data.images[currentImage()].path"
+          [alt]="data.name"
+          class="w-full h-full object-cover transition-all duration-300"
+        />
+        @if (data.images.length > 1) {
+          <button mat-icon-button
+                  class="!absolute left-2 top-1/2 -translate-y-1/2 !z-10 !bg-black/40 !text-white !flex !items-center !justify-center"
+                  (click)="prevImage()">
+            <mat-icon class="!leading-none">chevron_left</mat-icon>
+          </button>
+          <button mat-icon-button
+                  class="!absolute right-2 top-1/2 -translate-y-1/2 !z-10 !bg-black/40 !text-white !flex !items-center !justify-center"
+                  (click)="nextImage()">
+            <mat-icon class="!leading-none">chevron_right</mat-icon>
+          </button>
+          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+            @for (img of data.images; track $index) {
+              <span
+                class="w-5 h-3 rounded-full transition-all cursor-pointer"
+                [ngClass]="currentImage() === $index ? 'bg-white' : 'opacity-40 bg-white'"
+                (click)="currentImage.set($index)"
+              ></span>
+            }
+          </div>
+        }
+      </div>
+    }
+
+    <div class="px-6 py-8 space-y-4">
+      <h2 class="text-2xl font-bold text-[var(--text-color)]">{{ data.name }}</h2>
+
+      <!-- Infos -->
+      <div class="flex flex-wrap gap-3">
+        @if (data.date_start) {
+          <span class="eyebrow">{{ data.date_start }} → {{ data.date_end ?? 'En cours' }}</span>
+        }
+        @if (data.is_github) {
+          <span class="eyebrow">GitHub</span>
+        }
+      </div>
+
+      <!-- URL -->
+      @if (data.url) {
+        <a [href]="data.url" target="_blank" rel="noreferrer"
+           class="inline-flex items-center gap-1 text-sm underline"
+           style="color: var(--accent-color)">
+          <mat-icon style="font-size:16px;width:16px;height:16px">open_in_new</mat-icon>
+          {{ data.url }}
+        </a>
+      }
+
+      <!-- Description markdown -->
+      @if (data.description) {
+        <markdown [data]="data.description"></markdown>
+      }
+
+      <!-- Bouton fermer -->
+      <div class="flex justify-end pt-4">
+        <button mat-flat-button mat-dialog-close>Fermer</button>
+      </div>
+    </div>
+
+  </ng-scrollbar>
+</div>
+
