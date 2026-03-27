@@ -18,14 +18,16 @@ public class ProjectMapper {
     private final ImageServiceInterface imageServiceInterface;
 
     public Project toEntity(ProjectDTO dto) {
-        return new Project(dto.name(), dto.url(), dto.isGithub(), dto.description());
+        return new Project(dto.name(), dto.url(), dto.isGithub(), dto.description(), dto.dateStart(), dto.dateEnd());
     }
 
     public Project toEntity(ProjectDTO dto, Project p) {
         p.setName(dto.name());
         p.setUrl(dto.url());
-        p.setDescription(dto.description());
         p.setIsGithub(dto.isGithub());
+        p.setDescription(dto.description());
+        p.setDateStart(dto.dateStart());
+        p.setDateEnd(dto.dateEnd());
         return p;
     }
 
@@ -36,6 +38,8 @@ public class ProjectMapper {
                 p.getUrl(),
                 p.getIsGithub(),
                 p.getDescription(),
+                p.getDateStart(),
+                p.getDateEnd(),
                 imageMapper.toDto(images)
         );
     }

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -29,11 +29,18 @@ public class Project {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    public Project(String name, String url, Boolean isGithub, String description){
+    @Column(nullable = false)
+    private LocalDate dateStart;
+
+    private LocalDate dateEnd;
+
+    public Project(String name, String url, Boolean isGithub, String description, LocalDate dateStart, LocalDate dateEnd){
         this.name = name;
         this.url = url;
         this.isGithub = isGithub;
         this.description = description;
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
     }
 
     public Project() {}
