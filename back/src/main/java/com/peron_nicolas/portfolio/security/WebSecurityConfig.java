@@ -89,6 +89,8 @@ public class WebSecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/experience/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/about/**").permitAll()
 
+                                .requestMatchers("/uploads/**").permitAll()
+
                                 // Let others methods with authentication (POST/PUT/DELETE)
                                 .anyRequest().authenticated()
                 );
