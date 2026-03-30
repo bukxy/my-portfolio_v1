@@ -1,8 +1,10 @@
 package com.peron_nicolas.portfolio.dto.project;
 
 import com.peron_nicolas.portfolio.dto.image.ImageMapper;
+import com.peron_nicolas.portfolio.dto.skill.SkillDTO;
 import com.peron_nicolas.portfolio.entity.Image;
 import com.peron_nicolas.portfolio.entity.Project;
+import com.peron_nicolas.portfolio.entity.Skill;
 import com.peron_nicolas.portfolio.enums.EntityTypeEnum;
 import com.peron_nicolas.portfolio.service.image.ImageServiceInterface;
 import lombok.RequiredArgsConstructor;
@@ -17,17 +19,21 @@ public class ProjectMapper {
     private final ImageMapper imageMapper;
     private final ImageServiceInterface imageServiceInterface;
 
-    public Project toEntity(ProjectDTO dto) {
-        return new Project(dto.name(), dto.url(), dto.isGithub(), dto.description(), dto.dateStart(), dto.dateEnd());
+    public Project toEntity(ProjectCreateDTO dto, List<Skill> skills) {
+        Project project = new Project(dto.name(), dto.url(), dto.isGithub(), dto.description(), dto.shortDescription(), dto.dateStart(), dto.dateEnd());
+        project.setSkills(skills);
+        return project;
     }
 
-    public Project toEntity(ProjectDTO dto, Project p) {
+    public Project toEntity(ProjectCreateDTO dto, Project p, List<Skill> skills) {
         p.setName(dto.name());
         p.setUrl(dto.url());
         p.setIsGithub(dto.isGithub());
         p.setDescription(dto.description());
+        p.setShortDescription(dto.shortDescription());
         p.setDateStart(dto.dateStart());
         p.setDateEnd(dto.dateEnd());
+        p.setSkills(skills);
         return p;
     }
 
@@ -38,9 +44,13 @@ public class ProjectMapper {
                 p.getUrl(),
                 p.getIsGithub(),
                 p.getDescription(),
+                p.getShortDescription(),
                 p.getDateStart(),
                 p.getDateEnd(),
-                imageMapper.toDto(images)
+                imageMapper.toDto(images),
+                p.getSkills().stream()
+                        .map(s -> new SkillDTO(s.getId(), s.getName(), s.getPercentage()))
+                        .toList()
         );
     }
 
