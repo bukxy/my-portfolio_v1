@@ -27,7 +27,7 @@
   --secondary-color: #111111;
   --text-color: #111111;
   --text-muted: rgba(17, 17, 17, 0.72);
-  --accent-color: #dc2626;
+  --accent-color: #ed4e4e;
   --border-color: rgba(17, 17, 17, 0.12);
   --overlay-color: rgba(255, 255, 255, 0.72);
 }
@@ -113,10 +113,6 @@ Icons CRUD
 .small-icon {
   font-size: 16px; width: 16px; height: 16px;
 }
-.small-icon .mat-mdc-button-touch-target {
-  width: 28px !important;
-  height: 28px !important;
-}
 .small-icon.mat-mdc-icon-button {
   width: 28px !important;
   height: 28px !important;
@@ -187,5 +183,68 @@ Icons CRUD
 
   .cdk-overlay-dark-backdrop {
     background: rgba(0,0,0,.8) !important;
+  }
+
+  markdown {
+    h1, h2, h3 {
+      color: var(--text-color);
+      font-weight: 600;
+      margin: 1rem 0 0.5rem;
+    }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.1rem; }
+
+    p {
+      margin: 0.5rem 0;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    ul, ol {
+      margin: 0.5rem 0 0.5rem 1.5rem;
+      color: var(--text-muted);
+    }
+
+    li { margin: 0.25rem 0; }
+
+    code {
+      background: var(--bg-color);
+      color: var(--secondary-color);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    pre {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+    }
+
+    hr {
+      border-color: var(--border-color);
+      margin: 1rem 0;
+    }
+
+    img {
+      border-radius: 8px;
+      margin: 0.5rem 0;
+    }
+  }
+
+  markdown * a,
+  markdown p a,
+  markdown a {
+    color: var(--accent-color) !important;
+    text-decoration: underline !important;
+  }
+  markdown * a:hover,
+  markdown p a:hover,
+  markdown li a:hover {
+    text-decoration: none !important;
   }
 }
