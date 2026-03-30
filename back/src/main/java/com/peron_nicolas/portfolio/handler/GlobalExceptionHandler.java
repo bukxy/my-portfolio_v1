@@ -2,15 +2,18 @@ package com.peron_nicolas.portfolio.handler;
 
 import com.peron_nicolas.portfolio.tools.MessageTool;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.server.ResponseStatusException;
+import tools.jackson.core.exc.StreamReadException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +24,7 @@ import static org.springframework.http.HttpStatus.*;
 
 @ControllerAdvice
 @RequiredArgsConstructor
+@Slf4j
 public class GlobalExceptionHandler {
 
     private final MessageTool messageTool;
@@ -42,10 +46,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<?> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
-        String field = "unknown";
         String causeMessage = ex.getCause() != null ? ex.getCause().getMessage() : "";
 
+        // JSON error
+        if (ex.getCause() instanceof StreamReadException) {
+            return ResponseEntity.badRequest()
+                    .body(Map.of("message", messageTool.set("validation.json.malformed")));
+        }
+
         // Get key name
+        String field = "unknown";
         Matcher fieldMatcher = Pattern.compile("\\[\"(.+?)\"]").matcher(causeMessage);
         if (fieldMatcher.find()) {
             field = fieldMatcher.group(1);
@@ -78,7 +88,7 @@ public class GlobalExceptionHandler {
         }
 
         return ResponseEntity.badRequest()
-                .body(Map.of("message", "Data integrity violation"));
+                .body(Map.of("message", "Data integrity violation : " + ex.getMessage()));
     }
 
     @ExceptionHandler(ResponseStatusException.class)
@@ -110,4 +120,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(ex.getStatusCode())
                 .body(Map.of("message", message));
     }
+
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    public ResponseEntity<?> handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException ex) {
+         return ResponseEntity.status(ex.getStatusCode())
+                 .body(Map.of("message", ex.getMessage()));
+     }
 }
