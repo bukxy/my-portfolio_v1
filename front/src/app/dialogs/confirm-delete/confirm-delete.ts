@@ -11,10 +11,12 @@ import {
 import {SnackBarCall} from '../../services/snack-bar/snack-bar';
 import {SkillService} from '../../services/skill/skill-service';
 import {DataModel} from '../../interfaces/data-model-interface';
+import {ProjectService} from '../../services/project/project-service';
 
 // Service list used by delete dialog
 const SERVICE_MAP: Record<string, any> = {
   SkillService: SkillService,
+  ProjectService: ProjectService,
 };
 
 @Component({
