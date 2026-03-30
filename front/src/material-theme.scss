@@ -8,7 +8,7 @@
 
 :root {
   @include mat.dialog-overrides((
-    container-color: var(--bg-color),
+    container-color: var(--bg-color)
   ));
 
   @include mat.form-field-overrides((
@@ -48,6 +48,47 @@
     thumb-min-size: 5px,
     track-offset: 5px,
   ));
+  @include mat.chips-overrides((
+    label-text-size: 0.75rem,
+    container-shape-radius: var(--border-radius),
+
+    // Chip normal
+    label-text-color: var(--text-color),
+    outline-color: var(--accent-color),
+    elevated-container-color: var(--bg-color),
+
+    // Chip row (supprimable)
+    selected-label-text-color: var(--text-color),
+    selected-focus-state-layer-color: var(--accent-color),
+  ));
+
+  @include mat.slide-toggle-overrides((
+    handle-shape: var(--border-radius),
+    track-shape: var(--border-radius),
+    handle-surface-color: var(--bg-color),
+
+    unselected-track-color: var(--bg-color),
+    track-outline-color: var(--secondary-color),
+    unselected-handle-color: var(--secondary-color),
+    unselected-icon-color: var(--bg-color),
+    unselected-hover-handle-color: var(--secondary-color),
+    unselected-focus-handle-color: var(--secondary-color),
+
+    selected-track-color: var(--bg-color),
+    selected-track-outline-color: var(--secondary-color),
+    selected-handle-color: var(--secondary-color),
+    selected-icon-color: var(--bg-color),
+    selected-hover-handle-color: var(--secondary-color),
+    selected-focus-handle-color: var(--secondary-color),
+  ));
+}
+
+.cdk-overlay-pane.mat-mdc-dialog-panel {
+  margin: 40px 0 !important;
+}
+
+.cdk-global-overlay-wrapper {
+  padding: 40px 0 !important;
 }
 
 .mdc-text-field--filled {
@@ -91,8 +132,24 @@ button[mat-flat-button] {
     margin-left: 0 !important;
   }
 
+  &.show-button {
+    @include mat.button-overrides((
+      filled-container-color: color-mix(in srgb, var(--accent-color) 50%, transparent) !important,
+    ));
+
+    &:hover:not(:disabled) {
+      background-color: var(--accent-color) !important;
+      color: var(--bg-color) !important;
+    }
+  }
+
   &:hover:not(:disabled) {
     background-color: var(--text-muted) !important;
+    color: var(--bg-color) !important;
+  }
+
+  &[mat-dialog-close]:hover:not(:disabled) {
+    background-color: var(--accent-color) !important;
     color: var(--bg-color) !important;
   }
 
@@ -130,6 +187,25 @@ mat-snack-bar-container {
 /*
  SNACKBAR
  */
+
+
+.mat-mdc-chip-input {
+  color: var(--text-color) !important;
+}
+
+.mat-mdc-autocomplete-panel {
+  background: var(--surface-color) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
+}
+
+.mat-mdc-option {
+  color: var(--text-color) !important;
+
+  &:hover {
+    background: var(--surface-elevated) !important;
+  }
+}
 
 //html {
 //  height: 100%;
