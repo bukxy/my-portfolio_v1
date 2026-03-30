@@ -7,26 +7,16 @@
 
   <div class="mb-12">
     <span class="eyebrow">Projects</span>
-    <h1 class="section-title">Portfolio</h1>
+    <div class="flex items-center justify-between">
+      <h1 class="section-title">Portfolio</h1>
+      @if (authService.isAuthenticated()) {
+        <button mat-icon-button matTooltip="Ajouter" (click)="openAddEditDialog()">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      }
+    </div>
     <div class="section-divider"></div>
   </div>
 
-  <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-    @for (item of dataportfolio; track $index) {
-      <article [accessKey]="$index" class="card-surface overflow-hidden">
-        <img [src]="item.img" [alt]="item.description" class="h-64 w-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
-        <div class="space-y-4 p-6">
-          <p class="leading-7 text-[var(--text-muted)]">{{item.description}}</p>
-          <a
-            [href]="item.link"
-            target="_blank"
-            rel="noreferrer"
-            class="inline-flex items-center text-sm font-semibold project-link"
-          >
-            View project
-          </a>
-        </div>
-      </article>
-    }
-  </div>
+  <app-project></app-project>
 </section>
