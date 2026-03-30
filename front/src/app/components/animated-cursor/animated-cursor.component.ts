@@ -39,14 +39,16 @@ export class AnimatedCursorComponent implements AfterViewInit {
 
   // Besoin pour remettre le cursor au dessus des dialog --' couplé avec le dialog dans app
   ngAfterViewInit() {
-    const inner = this.el.nativeElement.querySelector('.cursor-inner');
-    const outer = this.el.nativeElement.querySelector('.cursor-outer');
+    setTimeout(() => {
+      const inner = this.el.nativeElement.querySelector('.cursor-inner');
+      const outer = this.el.nativeElement.querySelector('.cursor-outer');
 
-    [inner, outer].forEach(el => {
-      document.body.appendChild(el);
-      el.setAttribute('popover', 'manual');
-      el.showPopover();
-    });
+      [inner, outer].forEach(el => {
+        document.body.appendChild(el);
+        el.setAttribute('popover', 'manual');
+        el.showPopover();
+      });
+    }, 0);
   }
 
   innerX = signal(0); innerY = signal(0);
