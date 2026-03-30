@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,6 +37,11 @@ public class SkillService implements SkillServiceInterface {
         Skill skill = optionalSkill.get();
 
         return skill;
+    }
+
+    @Override
+    public List<Skill> findAllByIds(List<Long> ids) {
+        return skillRepository.findAllById(ids);
     }
 
     @Override
