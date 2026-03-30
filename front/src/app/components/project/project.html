@@ -1,0 +1,44 @@
+<div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+  @for (item of projects(); track $index) {
+    <article [accessKey]="$index" class="card-surface overflow-hidden flex flex-col">
+      @if (item.images.length) {
+        <img [src]="item.images[0].path" alt="alt" class="h-64 w-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />
+      }
+      <div class="space-y-4 p-6 flex flex-col flex-1">
+        <p class="font-bold text-[var(--text-color)] flex items-center justify-between">
+          {{item.name}}
+          <mat-chip-set>
+            @if (item.date_start) {
+              <mat-chip>{{ item.date_start | date:'yyyy' }} → {{ item.date_end ? (item.date_end | date:'yyyy') : 'En cours' }}</mat-chip>
+            }
+          </mat-chip-set>
+        </p>
+
+        @if (item.short_description) {
+          <p class="text-sm text-[var(--text-muted)] leading-6">{{ item.short_description }}</p>
+        }
+
+        <mat-chip-set aria-label="Fish selection">
+          @for (skill of item.skills.slice(0, 3); track skill) {
+            <mat-chip>{{ skill.name }}</mat-chip>
+          }
+          @if (item.skills.length > 3) {
+            <mat-chip matTooltip="{{ item.skills.slice(3).map(s => s.name).join(', ') }}" #tooltip="matTooltip"
+            >
+              +{{ item.skills.length - 3 }}
+            </mat-chip>
+          }
+        </mat-chip-set>
+
+        <div class="flex items-center justify-between mt-auto">
+          <button (click)="openProject(item)" class="primary-btn w-100">
+            Afficher
+          </button>
+          @if (authService.isAuthenticated()) {
+            <app-project-add-edit [projectData]="item"></app-project-add-edit>
+          }
+        </div>
+      </div>
+    </article>
+  }
+</div>
