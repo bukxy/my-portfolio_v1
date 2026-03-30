@@ -3,7 +3,6 @@ package com.peron_nicolas.portfolio.service.project;
 import com.peron_nicolas.portfolio.entity.Project;
 import com.peron_nicolas.portfolio.enums.EntityTypeEnum;
 import com.peron_nicolas.portfolio.repository.ProjectRepository;
-import com.peron_nicolas.portfolio.service.image.ImageService;
 import com.peron_nicolas.portfolio.service.image.ImageServiceInterface;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +13,6 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -40,20 +37,15 @@ public class ProjectService implements ProjectServiceInterface {
     }
 
     @Override
+    @Transactional
     public List<Project> findAll() {
         return projectRepository.findAll();
     }
 
     @Override
+    @Transactional
     public Project getById(Long id) {
-        Optional<Project> optionalProject = projectRepository.findById(id);
-        if (optionalProject.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-
-        Project project = optionalProject.get();
-
-        return project;
+        return projectRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
