@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -20,6 +23,9 @@ public class Skill {
 
     @Column(nullable = false)
     private Byte percentage;
+
+    @ManyToMany(mappedBy = "skills")
+    private List<Project> projects = new ArrayList<>();
 
     public Skill(String name, Byte percentage) {
         this.name = name;
