@@ -1,0 +1,25 @@
+<mat-form-field class="w-full">
+  <mat-chip-grid #chipGrid>
+    @for (item of selectedItems(); track item.id) {
+      <mat-chip-row (removed)="remove(item)">
+        {{ item.name }}
+        <button matChipRemove><mat-icon>cancel</mat-icon></button>
+      </mat-chip-row>
+    }
+  </mat-chip-grid>
+
+  <input
+    #itemInput
+    [(ngModel)]="currentInput"
+    [matChipInputFor]="chipGrid"
+    [matAutocomplete]="auto"
+    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+    [placeholder]="placeholder()"
+  />
+
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event); itemInput.value = ''">
+    @for (item of filteredSuggestions(); track item.id) {
+      <mat-option [value]="item">{{ item.name }}</mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>
