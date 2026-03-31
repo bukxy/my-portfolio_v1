@@ -7,14 +7,13 @@ import {Login} from '../../dialogs/login/login';
 import {MatIcon} from '@angular/material/icon';
 import {MatIconButton} from '@angular/material/button';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
-import {MatTooltip} from '@angular/material/tooltip';
 import {LangService} from '../../services/lang/lang-service';
 import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, ThemeToggleComponent, RouterLinkActive, Login, MatIcon, MatIconButton, MatMenu, MatMenuTrigger, MatTooltip, MatMenuItem, TranslatePipe],
+  imports: [RouterLink, ThemeToggleComponent, RouterLinkActive, Login, MatIcon, MatIconButton, MatMenu, MatMenuTrigger, MatMenuItem, TranslatePipe],
   templateUrl: './header.component.html',
   styles: [`
     button {
