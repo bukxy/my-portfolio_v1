@@ -25,6 +25,7 @@
     "marked": "^17.0.5",
     "ngx-markdown": "^21.1.0",
     "ngx-scrollbar": "^19.1.4",
+    "ngx-typed-js": "^2.1.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "^0.16.1"
