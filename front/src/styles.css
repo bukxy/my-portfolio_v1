@@ -247,4 +247,23 @@ Icons CRUD
   markdown li a:hover {
     text-decoration: none !important;
   }
+
+  .lang-menu {
+    margin-left: -3px;
+  }
+  .lang-menu.mat-mdc-menu-panel {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    background-color: color-mix(in srgb, var(--secondary-color) 70%, transparent) !important;
+    border-radius: 0 0 var(--border-radius) var(--border-radius) !important;
+  }
+  .lang-menu .mat-mdc-menu-item {
+    padding: 0 6px 0 6px !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+  }
+  .lang-menu .mat-mdc-menu-item span {
+    font-size: 1.4rem;
+  }
+
 }
