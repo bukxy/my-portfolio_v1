@@ -2,11 +2,12 @@
   <ng-scrollbar style="height: calc(100vh - 80px)">
 
     @if (data.images?.length) {
-      <div class="relative h-64 flex-shrink-0 overflow-hidden">
+      <div class="relative h-96 flex-shrink-0 overflow-hidden">
         <img
           [src]="data.images[currentImage()].path"
           [alt]="data.name"
-          class="w-full h-full object-cover transition-all duration-300"
+          class="w-full h-full object-cover transition-all duration-300 cursor-zoom-in"
+          (click)="openLightbox(currentImage())"
         />
         @if (data.images.length > 1) {
           <button mat-icon-button
@@ -29,6 +30,36 @@
             }
           </div>
         }
+      </div>
+    }
+
+    <!-- Lightbox -->
+    @if (isLightboxOpen()) {
+      <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90"
+           (click)="closeLightbox()">
+        <button class="absolute top-4 right-4 text-white" (click)="closeLightbox()">
+          <mat-icon>close</mat-icon>
+        </button>
+
+        @if (data.images.length > 1) {
+          <button mat-icon-button
+                  class="!absolute left-4 !text-white !z-10"
+                  (click)="$event.stopPropagation(); prevImage()">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <button mat-icon-button
+                  class="!absolute right-4 !text-white !z-10"
+                  (click)="$event.stopPropagation(); nextImage()">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        }
+
+        <img
+          [src]="data.images[currentImage()].path"
+          [alt]="data.name"
+          class="max-h-[90vh] max-w-[90vw] object-contain"
+          (click)="$event.stopPropagation()"
+        />
       </div>
     }
 

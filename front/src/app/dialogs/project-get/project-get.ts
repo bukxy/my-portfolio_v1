@@ -25,6 +25,17 @@ export class ProjectGet {
   data = inject(MAT_DIALOG_DATA);
   currentImage = signal(0);
 
+  isLightboxOpen = signal(false);
+
+  openLightbox(index: number) {
+    this.currentImage.set(index);
+    this.isLightboxOpen.set(true);
+  }
+
+  closeLightbox() {
+    this.isLightboxOpen.set(false);
+  }
+
   prevImage() {
     this.currentImage.update(i => i === 0 ? this.data.images.length - 1 : i - 1);
   }
