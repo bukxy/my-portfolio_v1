@@ -1,0 +1,9 @@
+export interface LoginUser {
+  username: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  message: string;
+  access_token: string;
+}

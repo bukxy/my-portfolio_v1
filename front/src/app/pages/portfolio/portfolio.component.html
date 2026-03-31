@@ -1,19 +1,21 @@
-<div class="container About-header">
-  <div class="row mb-5 mt-3 pt-md-3">
-    <div class="col-lg-8">
-      <h1 class="display-4 mb-4">Portfolio</h1>
-      <hr class="t_border my-4 ml-0 text-left" />
+<section class="page-shell">
+  <header>
+    <meta charSet="utf-8" />
+    <title>{{ 'navigation.portfolio' | translate }}</title>
+    <meta name="description" content={meta.description} />
+  </header>
+
+  <div class="mb-12">
+    <div class="flex items-center justify-between">
+      <h1 class="section-title">{{ 'navigation.portfolio' | translate }}</h1>
+      @if (authService.isAuthenticated()) {
+        <button mat-icon-button matTooltip="Ajouter" (click)="openAddEditDialog()">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      }
     </div>
+    <div class="section-divider"></div>
   </div>
-  <div class="mb-5 po_items_ho">
-    @for (item of dataportfolio; track item.img) {
-      <div class="po_item">
-        <img [src]="item.img" alt="" />
-        <div class="content">
-          <p>{{ item.description }}</p>
-          <a [href]="item.link">view project</a>
-        </div>
-      </div>
-    }
-  </div>
-</div>
+
+  <app-project></app-project>
+</section>

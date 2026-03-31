@@ -1,0 +1,57 @@
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-[var(--bg-color)] border-1 border-[var(--border-color)]">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <h2 class="text-center text-2xl/9 font-bold tracking-tight text-[var(--text-color)]">Connexion</h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form [formGroup]="loginFormGroup" method="POST" (ngSubmit)="login()">
+      <div>
+        <label for="username" class="block text-sm/6 font-medium text-[var(--text-muted)] mb-2">
+          Identifiant
+        </label>
+        <mat-form-field class="w-full">
+          <input
+            id="username"
+            matInput
+            formControlName="username"
+            required
+          />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <label for="password" class="block text-sm/6 font-medium text-[var(--text-muted)] mb-2">
+          Mot de passe
+        </label>
+        <mat-form-field>
+          <input
+            matInput
+            id="password"
+            [type]="hide() ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <button
+            matIconButton
+            matSuffix
+            (click)="clickEvent($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()"
+            style="width: 32px; height: 32px; font-size: 16px;"
+          >
+            <mat-icon style="font-size: 16px; width: 16px; height: 16px;">{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <button
+          mat-flat-button
+          type="submit"
+          [disabled]="! loginFormGroup.valid"
+        >
+          Essayer ✌️
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

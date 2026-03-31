@@ -3,6 +3,7 @@ package com.peron_nicolas.portfolio.security;
 import com.peron_nicolas.portfolio.service.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +58,19 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
         if (headerAuth != null && headerAuth.startsWith(BEARER_)) {
-            return headerAuth.substring(BEARER_.length());
+            String token =  headerAuth.substring(BEARER_.length());
+            if (request.getCookies() != null) {
+                for (Cookie cookie : request.getCookies()) {
+                    if ("access_token".equals(cookie.getName())) {
+                        return cookie.getValue();
+                    }
+                }
+            }
+
+            if (token.split("\\.").length == 3) {
+                return token;
+            }
+
         }
         return null;
     }

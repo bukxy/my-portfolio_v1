@@ -1,36 +1,44 @@
-<section id="home" class="home">
-  <div class="intro_sec d-block d-lg-flex align-items-center">
-    <div class="h_bg-image order-1 order-lg-2 h-100"
-         [style.backgroundImage]="'url(' + introdata.your_img_url + ')'">
+<section id="home" class="page-shell flex items-center min-h-screen">
+  <div class="grid w-full items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+    <div class="order-2 space-y-6 lg:order-1">
+      <div class="space-y-4">
+        <h1 class="font-display text-4xl md:text-5xl">{{ 'home.title' | translate }}</h1>
+        @if (animatedTexts().length) {
+          <ngx-typed-js
+            [strings]="animatedTexts()"
+            [shuffle]="true"
+            [typeSpeed]="80"
+            [backSpeed]="50"
+            [backDelay]="1500"
+            [loop]="true"
+            [showCursor]="false"
+          >
+            <h2 class="fluidz-48 mb-1x text-5xl my-6">
+              <span class="typing text-[var(--color-error)]"></span>
+              <span class="cursor-blink text-[var(--color-error)]">|</span>
+            </h2>
+          </ngx-typed-js>
+        }
+        <p class="max-w-2xl text-base leading-7 text-[var(--text-muted)] md:text-lg">{{ 'home.description' | translate }}</p>
+        <div class="flex flex-wrap gap-4">
+          <a routerLink="/portfolio" class="primary-btn">
+            {{ 'home.button.project' | translate }}
+          </a>
+          <a [href]="links.cv" class="secondary-btn">
+            {{ 'home.button.cv' | translate }}
+            </a>
+        </div>
+      </div>
     </div>
-    <div class="text order-2 order-lg-1 h-100 d-lg-flex justify-content-center">
-      <div class="align-self-center">
-        <div class="intro mx-auto">
-          <h2 class="mb-1x">{{ introdata.title }}</h2>
-          <h1 class="fluidz-48 mb-1x">
-            <span class="typewriter-text">{{ currentText() }}</span><span class="cursor-blink">|</span>
-          </h1>
-          <p class="mb-1x">{{ introdata.description }}</p>
-          <div class="intro_btn-action pb-5">
-            <a routerLink="/portfolio" class="text_2">
-              <div id="button_p" class="ac_btn btn">
-                My Portfolio
-                <div class="ring one"></div>
-                <div class="ring two"></div>
-                <div class="ring three"></div>
-              </div>
-            </a>
-            <a routerLink="/contact">
-              <div id="button_h" class="ac_btn btn">
-                Contact Me
-                <div class="ring one"></div>
-                <div class="ring two"></div>
-                <div class="ring three"></div>
-              </div>
-            </a>
-          </div>
+
+    <div class="order-1 lg:order-2">
+      <div class="card-surface overflow-hidden p-3">
+        <div class="min-h-[360px] rounded-[1.4rem] bg-cover bg-center md:min-h-[540px]"
+             [style.backgroundImage]="'url(' + introdata.your_img_url + ')'"
+        >
         </div>
       </div>
     </div>
   </div>
 </section>
+

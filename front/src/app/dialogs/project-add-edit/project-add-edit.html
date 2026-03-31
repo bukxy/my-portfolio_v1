@@ -1,0 +1,155 @@
+<!-- project-add-edit.html -->
+<div class="flex min-h-full flex-col justify-center px-6 py-12 bg-[var(--bg-color)]">
+  <div class="sm:mx-auto sm:w-full sm:max-w-lg">
+    <h2 class="text-center text-2xl/9 font-bold tracking-tight text-[var(--text-color)]">
+      {{ isEdit ? 'Modifier le projet' : 'Ajouter un projet' }}
+    </h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-lg">
+    <form [formGroup]="projectFormGroup" (ngSubmit)="submit()" class="space-y-4">
+
+      <!-- Nom -->
+      <div>
+        <label for="name" class="block text-sm/6 font-medium text-[var(--text-muted)] mb-2">
+          Nom du projet
+          @if (backendErrors()['name']) {
+            <mat-icon
+              #tooltip="matTooltip"
+              matTooltip="{{ backendErrors()['name'] }}"
+              class="error-icon"
+            >
+              info
+            </mat-icon>
+          }
+        </label>
+        <mat-form-field class="w-full">
+          <input id="name" matInput formControlName="name" type="text" required />
+        </mat-form-field>
+      </div>
+
+      <!-- Short Description -->
+      <div>
+        <label for="description" class="block text-sm/6 font-medium text-[var(--text-muted)] mb-2">
+          Courte description
+          @if (backendErrors()['name']) {
+            <mat-icon
+              #tooltip="matTooltip"
+              matTooltip="{{ backendErrors()['description'] }}"
+              class="error-icon"
+            >
+              info
+            </mat-icon>
+          }
+        </label>
+        <mat-form-field class="w-full">
+          <input id="description" matInput formControlName="short_description"/>
+        </mat-form-field>
+      </div>
+
+      <!-- URL -->
+      <div>
+        <label for="url" class="block text-sm/6 font-medium text-[var(--text-muted)] mb-2">
+          URL
+          @if (backendErrors()['url']) {
+            <mat-icon
+              #tooltip="matTooltip"
+              matTooltip="{{ backendErrors()['url'] }}"
+              class="error-icon"
+            >
+              info
+            </mat-icon>
+          }
+        </label>
+        <mat-form-field class="w-full">
+          <input id="url" matInput formControlName="url" type="url" required/>
+        </mat-form-field>
+      </div>
+
+      <!-- Dates -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="date_start" class="block text-sm/6 font-medium text-[var(--text-muted)] mb-2">
+            Date début
+            @if (backendErrors()['date_start']) {
+              <mat-icon
+                #tooltip="matTooltip"
+                matTooltip="{{ backendErrors()['date_start'] }}"
+                class="error-icon"
+              >
+                info
+              </mat-icon>
+            }
+          </label>
+          <mat-form-field class="w-full">
+            <input id="date_start" matInput formControlName="date_start" type="date" required />
+          </mat-form-field>
+        </div>
+        <div>
+          <label for="date_end" class="block text-sm/6 font-medium text-[var(--text-muted)] mb-2">
+            Date fin
+            @if (backendErrors()['date_end']) {
+              <mat-icon
+                #tooltip="matTooltip"
+                matTooltip="{{ backendErrors()['date_end'] }}"
+                class="error-icon"
+              >
+                info
+              </mat-icon>
+            }
+          </label>
+          <mat-form-field class="w-full">
+            <input id="date_end" matInput formControlName="date_end" type="date" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- GitHub -->
+      <div class="flex items-center gap-3">
+        <mat-slide-toggle
+          formControlName="is_github"
+          [checked]="data.is_github">
+          Projet GitHub
+        </mat-slide-toggle>
+      </div>
+
+      @if(!projectFormGroup.get('is_github')?.value) {
+        <!-- Description -->
+        <div>
+          <label for="description" class="block text-sm/6 font-medium text-[var(--text-muted)] mb-2">Description</label>
+          <mat-form-field class="w-full">
+            <textarea id="description" matInput formControlName="description" rows="3"></textarea>
+          </mat-form-field>
+        </div>
+      }
+
+      <app-chips-list
+        formControlName="skill_ids"
+        label="Skills"
+        placeholder="PHP, MySQL..."
+        [suggestions]="listSkill()"
+      ></app-chips-list>
+
+      <!-- Images -->
+      <div>
+        <label class="block text-sm/6 font-medium text-[var(--text-muted)] mb-2">Images</label>
+        <input
+          type="file"
+          multiple
+          accept="image/*"
+          (change)="onFilesSelected($event)"
+          class="block w-full text-sm text-[var(--text-muted)] file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-[var(--border-color)] file:text-[var(--text-color)] hover:file:bg-[var(--text-muted)]"
+        />
+      </div>
+
+      <!-- Actions -->
+      <div class="space-y-3 pt-2">
+        <button mat-flat-button type="submit" [disabled]="!projectFormGroup.valid">
+          {{ isEdit ? 'Modifier' : 'Ajouter' }}
+        </button>
+        <button mat-flat-button mat-dialog-close>Annuler</button>
+      </div>
+
+    </form>
+  </div>
+</div>

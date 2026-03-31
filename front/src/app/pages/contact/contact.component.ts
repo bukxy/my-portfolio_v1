@@ -1,7 +1,8 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Title, Meta } from '@angular/platform-browser';
-import { meta, contactConfig } from '../../content_option';
+import {meta, contactConfig, socialprofils} from '../../content_option';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 
 interface FormState {
   name: string;
@@ -16,13 +17,16 @@ interface FormState {
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TranslatePipe],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
   private title = inject(Title);
   private metaService = inject(Meta);
+  private translate = inject(TranslateService);
+
+  socialprofils = socialprofils;
 
   contactConfig = contactConfig;
 
@@ -32,7 +36,9 @@ export class ContactComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.title.setTitle(`${meta.title} | Contact`);
+    this.translate.stream('navigation.contact').subscribe(translated => {
+      this.title.setTitle(`${translated} | ${meta.title}`);
+    });
     this.metaService.updateTag({ name: 'description', content: meta.description });
   }
 

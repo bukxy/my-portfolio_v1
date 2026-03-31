@@ -1,12 +1,13 @@
-import { Component, OnInit, OnDestroy, signal, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { Title, Meta } from '@angular/platform-browser';
-import { introdata, meta } from '../../content_option';
+import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {Meta, Title} from '@angular/platform-browser';
+import {introdata, links, meta} from '../../content_option';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
+import {NgxTypedJsModule} from 'ngx-typed-js';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, TranslatePipe, NgxTypedJsModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -15,13 +16,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   private metaService = inject(Meta);
 
   introdata = introdata;
+
   currentText = signal('');
   private animIndex = 0;
   private charIndex = 0;
   private isDeleting = false;
   private timer: ReturnType<typeof setTimeout> | null = null;
+  private translate = inject(TranslateService);
+  animatedTexts = signal<string[]>([]);
 
   ngOnInit() {
+    this.translate.stream('home.animated').subscribe(texts => {
+      if (Array.isArray(texts)) {
+        this.animatedTexts.set(texts);
+      }
+    });
+
     this.title.setTitle(meta.title);
     this.metaService.updateTag({ name: 'description', content: meta.description });
     this.typeWriter();
@@ -55,4 +65,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.timer = setTimeout(() => this.typeWriter(), delay);
   }
+
+  protected readonly links = links;
 }

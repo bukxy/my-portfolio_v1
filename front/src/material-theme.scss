@@ -1,0 +1,240 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+@use 'ngx-scrollbar' as scrollbar;
+
+:root {
+  @include mat.dialog-overrides((
+    container-color: var(--bg-color)
+  ));
+
+  @include mat.form-field-overrides((
+    filled-container-color: var(--bg-color),
+    outlined-focus-outline-color: var(--bg-color),
+    outlined-hover-outline-color: var(--bg-color),
+
+    filled-input-text-color: var(--text-color),
+    filled-label-text-color: var(--text-muted),
+    filled-focus-label-text-color: var(--text-muted),
+
+    filled-active-indicator-color: var(--border-color),
+    filled-focus-active-indicator-color: var(--border-color),
+    filled-hover-active-indicator-color: var(--border-color),
+
+    container-vertical-padding: 5px,
+    container-height: 30px,
+
+    filled-input-text-placeholder-color: var(--text-muted),
+
+    filled-caret-color: var(--text-color),
+
+    filled-container-shape: 100%
+  ));
+
+  @include mat.tooltip-overrides((
+    container-color: var(--secondary-color),
+    container-shape: var(--border-radius),
+    supporting-text-color: var(--bg-color),
+  ));
+
+  @include scrollbar.ng-scrollbar-overrides((
+    track-color: color-mix(in srgb, var(--accent-color) 10%, transparent),
+    thumb-color: color-mix(in srgb, var(--accent-color) 40%, transparent),
+    track-thickness: 18px,
+    track-shape: var(--border-radius),
+    thumb-min-size: 5px,
+    track-offset: 5px,
+  ));
+  @include mat.chips-overrides((
+    label-text-size: 0.75rem,
+    container-shape-radius: var(--border-radius),
+
+    // Chip normal
+    label-text-color: var(--text-color),
+    outline-color: var(--accent-color),
+    elevated-container-color: var(--bg-color),
+
+    // Chip row (supprimable)
+    selected-label-text-color: var(--text-color),
+    selected-focus-state-layer-color: var(--accent-color),
+  ));
+
+  @include mat.slide-toggle-overrides((
+    handle-shape: var(--border-radius),
+    track-shape: var(--border-radius),
+    handle-surface-color: var(--bg-color),
+
+    unselected-track-color: var(--bg-color),
+    track-outline-color: var(--secondary-color),
+    unselected-handle-color: var(--secondary-color),
+    unselected-icon-color: var(--bg-color),
+    unselected-hover-handle-color: var(--secondary-color),
+    unselected-focus-handle-color: var(--secondary-color),
+
+    selected-track-color: var(--bg-color),
+    selected-track-outline-color: var(--secondary-color),
+    selected-handle-color: var(--secondary-color),
+    selected-icon-color: var(--bg-color),
+    selected-hover-handle-color: var(--secondary-color),
+    selected-focus-handle-color: var(--secondary-color),
+  ));
+}
+
+.cdk-overlay-pane.mat-mdc-dialog-panel {
+  margin: 40px 0 !important;
+}
+
+.cdk-global-overlay-wrapper {
+  padding: 40px 0 !important;
+}
+
+.mdc-text-field--filled {
+  border-radius: 6px !important;
+  outline: 1px solid var(--border-color);
+
+  &:focus-within {
+    outline: 2px solid var(--border-color);
+  }
+}
+.mdc-line-ripple {
+  display: none;
+}
+
+button[mat-flat-button] {
+  width: 100%;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color 0.2s, color 0.2s;
+
+  @include mat.button-overrides((
+    filled-container-shape: var(--border-radius),
+    filled-disabled-container-color: var(--border-color),
+    filled-disabled-label-text-color: var(--text-muted),
+  ));
+
+  &[type="submit"] {
+    @include mat.button-overrides((
+      filled-container-color: var(--border-color),
+      filled-label-text-color: var(--text-color),
+    ));
+  }
+
+  &[mat-dialog-close] {
+    @include mat.button-overrides((
+      filled-container-color: var(--accent-color),
+      filled-label-text-color: var(--text-color),
+    ));
+
+    margin-left: 0 !important;
+  }
+
+  &.show-button {
+    @include mat.button-overrides((
+      filled-container-color: color-mix(in srgb, var(--accent-color) 50%, transparent) !important,
+    ));
+
+    &:hover:not(:disabled) {
+      background-color: var(--accent-color) !important;
+      color: var(--bg-color) !important;
+    }
+  }
+
+  &:hover:not(:disabled) {
+    background-color: var(--text-muted) !important;
+    color: var(--bg-color) !important;
+  }
+
+  &[mat-dialog-close]:hover:not(:disabled) {
+    background-color: var(--accent-color) !important;
+    color: var(--bg-color) !important;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--text-muted) !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/*
+ SNACKBAR
+ */
+mat-snack-bar-container {
+  font-weight: 500;
+  background-color: var(--secondary-color) !important;
+  color: var(--text-color) !important;
+  border-radius: var(--border-radius) !important;
+}
+
+.success-snackbar {
+  color: var(--color-success) !important;
+}
+
+.error-snackbar {
+  color: var(--color-error) !important;
+}
+
+.warning-snackbar {
+  color: var(--color-warning) !important;
+}
+
+.default-snackbar {
+  color: var(--color-info) !important;
+}
+/*
+ SNACKBAR
+ */
+
+
+.mat-mdc-chip-input {
+  color: var(--text-color) !important;
+}
+
+.mat-mdc-autocomplete-panel {
+  background: var(--surface-color) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
+}
+
+.mat-mdc-option {
+  color: var(--text-color) !important;
+
+  &:hover {
+    background: var(--surface-elevated) !important;
+  }
+}
+
+//html {
+//  height: 100%;
+//  @include mat.theme(
+//    (
+//      color: (
+//        primary: mat.$cyan-palette,
+//        tertiary: mat.$orange-palette,
+//      ),
+//      typography: Roboto,
+//      density: 0,
+//    )
+//  );
+//}
+//
+//body {
+//  // Default the application to a light color theme. This can be changed to
+//  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+//  // user's system settings.
+//  color-scheme: light;
+//
+//  // Set a default background, font and text colors for the application using
+//  // Angular Material's system-level CSS variables. Learn more about these
+//  // variables at https://material.angular.dev/guide/system-variables
+//  background-color: var(--mat-sys-surface);
+//  color: var(--mat-sys-on-surface);
+//  font: var(--mat-sys-body-medium);
+//
+//  // Reset the user agent margin.
+//  margin: 0;
+//  height: 100%;
+//}

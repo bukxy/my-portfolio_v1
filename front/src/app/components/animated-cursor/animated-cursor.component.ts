@@ -1,4 +1,4 @@
-import { Component, HostListener, signal } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, inject, signal, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-animated-cursor',
@@ -34,7 +34,23 @@ import { Component, HostListener, signal } from '@angular/core';
     }
   `]
 })
-export class AnimatedCursorComponent {
+export class AnimatedCursorComponent implements AfterViewInit {
+  protected readonly el = inject(ElementRef);
+
+  // Besoin pour remettre le cursor au dessus des dialog --' couplé avec le dialog dans app
+  ngAfterViewInit() {
+    setTimeout(() => {
+      const inner = this.el.nativeElement.querySelector('.cursor-inner');
+      const outer = this.el.nativeElement.querySelector('.cursor-outer');
+
+      [inner, outer].forEach(el => {
+        document.body.appendChild(el);
+        el.setAttribute('popover', 'manual');
+        el.showPopover();
+      });
+    }, 0);
+  }
+
   innerX = signal(0); innerY = signal(0);
   outerX = signal(0); outerY = signal(0);
   innerScale = signal(0.7);

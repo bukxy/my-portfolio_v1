@@ -1,0 +1,49 @@
+{
+  "navigation": {
+    "home" : "Accueil",
+    "portfolio" : "Mes projets",
+    "about" : "A propos",
+    "contact" : "Contact"
+  },
+  "home": {
+    "title": "Je développe",
+    "animated": ["avec passion", "des applications variées", "des plugins JAVA"],
+    "description": "Développeur Full Stack passionné par le Web et le Gaming",
+    "button": {
+      "project": "Mes projets",
+      "cv": "CV"
+    }
+  },
+  "about": {
+    "content": "Passionné de développement depuis plusieurs années, j'aime créer des applications web et mobiles modernes. Toujours curieux d'apprendre de nouvelles technologies, je m'investis dans chaque projet avec rigueur et créativité. J'apprécie autant le développement back-end que front-end, ce qui me permet d'avoir une vision complète des projets que je réalise.",
+    "work": {
+      "title": "Expériences professionnelles — Développeur"
+    },
+    "skill": {
+      "title": "Compétences"
+    },
+    "service": {
+      "title": "Services",
+      "web": {
+        "title": "Développement Web",
+        "content": "Conception et développement d'applications web modernes, du front-end au back-end, avec des technologies comme PHP ou Java."
+      },
+      "plugin": {
+        "title": "Conception de Plugins JAVA (WIP)",
+        "content": "Développement de plugins Java personnalisés pour serveurs de jeux, afin d'enrichir l'expérience des joueurs avec de nouvelles fonctionnalités."
+      }
+    }
+  },
+  "project": {
+    "date_end": "En cours"
+  },
+  "contact": {
+    "content": "N'hésitez pas à me contacter via mes réseaux ci-dessous 💗, \npar email à <a href='mailto:pro.peron.nicolas2@gmail.com' style='color: var(--accent-color)'>pro.peron.nicolas2@gmail.com</a>, ou par téléphone au <a href='tel:0616540491' style='color: var(--accent-color)'>06 16 54 04 91</a>"
+  },
+
+  "button": {
+    "back": "Retour",
+    "show": "Afficher",
+    "close": "Fermer"
+  }
+}
