@@ -1,7 +1,7 @@
 {
   "navigation": {
     "home" : "Home",
-    "portfolio" : "Portofolio",
+    "portfolio" : "Portfolio",
     "about" : "About me",
     "contact" : "Contact"
   },
@@ -15,7 +15,7 @@
     }
   },
   "about": {
-    "content": "TO DO",
+    "content": "Passionate about development for several years, I enjoy creating modern web and mobile applications. Always curious to learn new technologies, I approach each project with rigor and creativity. I appreciate both back-end and front-end development, which gives me a complete vision of the projects I work on.",
     "work": {
       "title": "Work Timeline"
     },
@@ -24,6 +24,6 @@
     }
   },
   "contact": {
-    "content": "Vous pouvez me contacter via mes réseaux ci-dessous \uD83D\uDC97"
+    "content": "Feel free to reach out to me through my networks below 💗, \nby email at <a href='mailto:pro.peron.nicolas2@gmail.com' style='color: var(--accent-color)'>pro.peron.nicolas2@gmail.com</a>, or by phone at <a href='tel:0616540491' style='color: var(--accent-color)'>06 16 54 04 91</a>"
   }
 }
