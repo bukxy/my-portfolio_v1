@@ -1,12 +1,11 @@
-import {Component, OnInit, inject, input} from '@angular/core';
-import { Title, Meta } from '@angular/platform-browser';
-import { dataportfolio, meta } from '../../content_option';
+import {Component, inject, input, OnInit} from '@angular/core';
+import {Meta, Title} from '@angular/platform-browser';
+import {meta} from '../../content_option';
 import {Project} from '../../components/project/project';
 import {MatIcon} from '@angular/material/icon';
 import {MatIconButton} from '@angular/material/button';
 import {MatTooltip} from '@angular/material/tooltip';
 import {MatDialog} from '@angular/material/dialog';
-import {RequesterService} from '../../services/requester/requester-service';
 import {ProjectAddEditForm} from '../../dialogs/project-add-edit/project-add-edit';
 import {AuthService} from '../../services/auth/auth-service';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
