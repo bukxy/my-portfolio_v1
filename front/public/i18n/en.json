@@ -17,13 +17,33 @@
   "about": {
     "content": "Passionate about development for several years, I enjoy creating modern web and mobile applications. Always curious to learn new technologies, I approach each project with rigor and creativity. I appreciate both back-end and front-end development, which gives me a complete vision of the projects I work on.",
     "work": {
-      "title": "Work Timeline"
+      "title": "Work Timeline — Developer"
     },
     "skill": {
       "title": "Skills"
+    },
+    "service": {
+      "title": "Services",
+      "web": {
+        "title": "Web Development",
+        "content": "Design and development of modern web applications, from front-end to back-end, using technologies like PHP or Java."
+      },
+      "plugin": {
+        "title": "JAVA Plugin Development (WIP)",
+        "content": "Development of custom Java plugins for game servers, to enhance the player experience with new features."
+      }
     }
+  },
+  "project": {
+    "date_end": "In progress"
   },
   "contact": {
     "content": "Feel free to reach out to me through my networks below 💗, \nby email at <a href='mailto:pro.peron.nicolas2@gmail.com' style='color: var(--accent-color)'>pro.peron.nicolas2@gmail.com</a>, or by phone at <a href='tel:0616540491' style='color: var(--accent-color)'>06 16 54 04 91</a>"
+  },
+
+  "button": {
+    "back": "Back",
+    "show": "Show",
+    "close": "Close"
   }
 }

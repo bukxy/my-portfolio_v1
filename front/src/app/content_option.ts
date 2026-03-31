@@ -22,41 +22,15 @@ export const dataabout = {
 };
 
 export const worktimeline = [
-  { jobtitle: 'Developpeur FullStack', where: 'Roubaix', date: '2022' },
-  { jobtitle: 'Developpeur Indépendant', where: 'Roubaix', date: '2021' },
+  { jobtitle: 'FullStack', where: 'Roubaix', date: '2023 - 2024' },
+  { jobtitle: 'Freelance', where: 'France', date: '2021' },
 ];
 
-export const skills = [
-  { name: 'PHP', value: 85 },
-  { name: 'Symfony / Laravel', value: 85 },
-  { name: 'React', value: 70 },
-  { name: 'Jquery', value: 70 },
-  { name: 'JAVA', value: 60 },
-  { name: 'Angular', value: 60 },
-  { name: 'SQL', value: 90 },
-  { name: 'Linux', value: 90 },
-  { name: 'Docker', value: 70 },
-];
 
 export const services = [
   { title: 'Développement Web', description: 'Conception et développement d\'applications web modernes, du front-end au back-end, avec des technologies comme Angular/React, PHP/Java.' },
   { title: 'Conception de BDD', description: 'Modélisation et gestion de bases de données relationnelles pour des applications robustes et scalables.' },
   { title: 'Conception de Plugins', description: 'Développement de plugins Java personnalisés pour serveurs de jeux, afin d\'enrichir l\'expérience des joueurs avec de nouvelles fonctionnalités.' },
-];
-
-export const dataportfolio = [
-  { img: 'https://picsum.photos/400/?grayscale', description: 'The wisdom of life consists in the elimination of non-essentials.', link: '#' },
-  { img: 'https://picsum.photos/400/800/?grayscale', description: 'The wisdom of life consists in the elimination of non-essentials.', link: '#' },
-  { img: 'https://picsum.photos/400/?grayscale', description: 'The wisdom of life consists in the elimination of non-essentials.', link: '#' },
-  { img: 'https://picsum.photos/400/600/?grayscale', description: 'The wisdom of life consists in the elimination of non-essentials.', link: '#' },
-  { img: 'https://picsum.photos/400/300/?grayscale', description: 'The wisdom of life consists in the elimination of non-essentials.', link: '#' },
-  { img: 'https://picsum.photos/400/700/?grayscale', description: 'The wisdom of life consists in the elimination of non-essentials.', link: '#' },
-  { img: 'https://picsum.photos/400/600/?grayscale', description: 'The wisdom of life consists in the elimination of non-essentials.', link: '#' },
-  { img: 'https://picsum.photos/400/300/?grayscale', description: 'The wisdom of life consists in the elimination of non-essentials.', link: '#' },
-  { img: 'https://picsum.photos/400/?grayscale', description: 'The wisdom of life consists in the elimination of non-essentials.', link: '#' },
-  { img: 'https://picsum.photos/400/550/?grayscale', description: 'The wisdom of life consists in the elimination of non-essentials.', link: '#' },
-  { img: 'https://picsum.photos/400/?grayscale', description: 'The wisdom of life consists in the elimination of non-essentials.', link: '#' },
-  { img: 'https://picsum.photos/400/700/?grayscale', description: 'The wisdom of life consists in the elimination of non-essentials.', link: '#' },
 ];
 
 export const contactConfig = {

@@ -19,7 +19,6 @@ export class AboutComponent implements OnInit {
   private title = inject(Title);
   private metaService = inject(Meta);
 
-  dataabout = dataabout;
   worktimeline = worktimeline;
 
   services = services;

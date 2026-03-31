@@ -9,7 +9,7 @@
           {{item.name}}
           <mat-chip-set>
             @if (item.date_start) {
-              <mat-chip>{{ item.date_start | date:'yyyy' }} → {{ item.date_end ? (item.date_end | date:'yyyy') : 'En cours' }}</mat-chip>
+              <mat-chip>{{ item.date_start | date:'yyyy' }} → {{ item.date_end ? (item.date_end | date:'yyyy') : ('project.date_end' | translate) }}</mat-chip>
             }
           </mat-chip-set>
         </p>
@@ -32,7 +32,7 @@
 
         <div class="flex items-center justify-between mt-auto">
           <button (click)="openProject(item)" class="primary-btn w-100">
-            Afficher
+            {{ 'button.show' | translate }}
           </button>
           @if (authService.isAuthenticated()) {
             <app-project-add-edit [projectData]="item"></app-project-add-edit>

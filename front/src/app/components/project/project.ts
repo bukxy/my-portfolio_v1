@@ -8,6 +8,7 @@ import {ProjectGet} from '../../dialogs/project-get/project-get';
 import {MatChip, MatChipSet} from '@angular/material/chips';
 import {DatePipe} from '@angular/common';
 import {MatTooltip} from '@angular/material/tooltip';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-project',
@@ -17,6 +18,7 @@ import {MatTooltip} from '@angular/material/tooltip';
     MatChipSet,
     DatePipe,
     MatTooltip,
+    TranslatePipe,
   ],
   templateUrl: './project.html',
 })

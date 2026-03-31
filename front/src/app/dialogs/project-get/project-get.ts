@@ -6,6 +6,7 @@ import {MatButton, MatIconButton} from '@angular/material/button';
 import {NgClass} from '@angular/common';
 import {NgScrollbar} from 'ngx-scrollbar';
 import {Project} from '../../components/project/project';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-project-get',
@@ -16,7 +17,8 @@ import {Project} from '../../components/project/project';
     MatDialogClose,
     MatIconButton,
     NgClass,
-    NgScrollbar
+    NgScrollbar,
+    TranslatePipe
   ],
   templateUrl: './project-get.html',
   styleUrl: './project-get.css',

@@ -37,16 +37,24 @@
     <app-skill></app-skill>
 
     <div class="card-surface p-6 lg:col-span-5 md:p-8">
-      <h3 class="font-display text-2xl">Services</h3>
+      <h3 class="font-display text-2xl">{{ 'about.service.title' | translate }}</h3>
       <div class="mt-6 space-y-4">
-        @if (isLoaded()) {
-          @for (item of services; track item) {
-            <div key={index} class="rounded-2xl border border-[var(--border-color)] p-4">
-              <h4 class="font-semibold">{{item.title}}</h4>
-              <p class="mt-2 text-sm leading-6 text-[var(--text-muted)]">{{item.description}}</p>
-            </div>
-          }
-        }
+        <div class="rounded-2xl border border-[var(--border-color)] p-4">
+          <h4 class="font-semibold">{{ 'about.service.web.title' | translate }}</h4>
+          <p class="mt-2 text-sm leading-6 text-[var(--text-muted)]">{{ 'about.service.web.content' | translate }}</p>
+        </div>
+        <div class="rounded-2xl border border-[var(--border-color)] p-4">
+          <h4 class="font-semibold">{{ 'about.service.plugin.title' | translate }}</h4>
+          <p class="mt-2 text-sm leading-6 text-[var(--text-muted)]">{{ 'about.service.plugin.content' | translate }}</p>
+        </div>
+<!--        @if (isLoaded()) {-->
+<!--          @for (item of services; track item) {-->
+<!--            <div key={index} class="rounded-2xl border border-[var(&#45;&#45;border-color)] p-4">-->
+<!--              <h4 class="font-semibold">{{item.title}}</h4>-->
+<!--              <p class="mt-2 text-sm leading-6 text-[var(&#45;&#45;text-muted)]">{{item.description}}</p>-->
+<!--            </div>-->
+<!--          }-->
+<!--        }-->
       </div>
     </div>
   </div>
