@@ -105,8 +105,8 @@ export class ProjectAddEditForm {
   protected readonly projectFormGroup= new FormGroup({
     name: new FormControl(this.data?.name || '' , [Validators.required]),
     url: new FormControl(this.data?.url || '', [Validators.required]),
-    is_github: new FormControl(this.data?.is_github || '', [Validators.required]),
-    short_description: new FormControl(this.data?.short_description || '', [Validators.required]),
+    is_github: new FormControl(this.data?.is_github || false, [Validators.required]),
+    short_description: new FormControl(this.data?.short_description || ''),
     description: new FormControl(this.data?.description || ''),
     date_start: new FormControl(this.data?.date_start || '', [Validators.required]),
     date_end: new FormControl(this.data?.date_end || '', []),
