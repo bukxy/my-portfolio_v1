@@ -7,6 +7,8 @@ import {AuthInterceptor} from './interceptors/auth-interceptor';
 import {Overlay} from '@angular/cdk/overlay';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {provideMarkdown} from 'ngx-markdown';
+import {provideTranslateService} from '@ngx-translate/core';
+import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +16,14 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([AuthInterceptor])),
     provideMarkdown(),
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: './i18n/',
+        suffix: '.json'
+      }),
+      fallbackLang: 'fr',
+      lang: 'fr'
+    }),
     // provideZoneChangeDetection()
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
