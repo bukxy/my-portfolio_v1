@@ -4,12 +4,14 @@ import {RequesterService} from '../../services/requester/requester-service';
 import {SkillsInterface} from '../../interfaces/skill-interface';
 import {SkillService} from '../../services/skill/skill-service';
 import {SkillAddEditDialog} from '../../dialogs/skill-add-edit/skill-add-edit';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-skill',
   host: { class: 'card-surface p-6 lg:col-span-7 md:p-8' },
   imports: [
     SkillAddEditDialog,
+    TranslatePipe,
   ],
   templateUrl: './skill.html',
 })

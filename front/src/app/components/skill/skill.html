@@ -1,5 +1,5 @@
   <div class="flex items-center justify-between">
-    <h3 class="font-display text-2xl">Skills</h3>
+    <h3 class="font-display text-2xl">{{ 'about.skill.title' | translate }}</h3>
     @if (authService.isAuthenticated()) {
       <app-skill-add-edit></app-skill-add-edit>
     }
