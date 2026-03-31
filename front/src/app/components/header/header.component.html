@@ -2,6 +2,20 @@
   <div class="mx-auto flex max-w-6xl items-center justify-between rounded-full border border-[var(--border-color)] bg-[var(--surface-color)]/80 px-4 py-3 shadow-soft backdrop-blur md:px-6">
     <a (click)="closeMenu()" class="font-display text-xl tracking-[0.35em] md:text-2xl" routerLink="/">{{ logotext }}</a>
     <div class="flex items-center gap-3">
+      <!-- dans header.component.html -->
+      <button mat-icon-button [matMenuTriggerFor]="langMenu" matTooltip="Langue" class="small-icon">
+        <span>{{ langService.currentLang() === 'fr' ? '🇫🇷' : '🇬🇧' }}</span>
+      </button>
+
+      <mat-menu #langMenu class="lang-menu" yPosition="below">
+        <button mat-menu-item (click)="langService.setLang('fr')">
+          <span>🇫🇷</span>
+        </button>
+        <button mat-menu-item (click)="langService.setLang('en')">
+          <span>🇬🇧</span>
+        </button>
+      </mat-menu>
+
       <app-login></app-login>
       <app-theme-toggle></app-theme-toggle>
       <button
