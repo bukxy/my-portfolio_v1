@@ -4,7 +4,7 @@ FROM node:20-alpine
 WORKDIR /app
  
 COPY front/package*.json ./
-RUN npm ci
+RUN npm i
  
 # Le code source est monté via volume dans docker-compose.dev.yml
 # donc pas de COPY du code ici
