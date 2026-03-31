@@ -36,11 +36,9 @@ export class App implements OnInit{
     // Curseur au-dessus de tous les overlays
     setTimeout(() => {
       const overlayContainer = document.querySelector('.cdk-overlay-container');
-      console.log('overlay container:', overlayContainer); // existe ?
 
       if (overlayContainer) {
         const observer = new MutationObserver((mutations) => {
-          console.log('mutation!');
           setTimeout(() => {
             const inner = document.querySelector('.cursor-inner') as any;
             const outer = document.querySelector('.cursor-outer') as any;
