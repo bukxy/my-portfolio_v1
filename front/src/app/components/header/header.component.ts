@@ -9,11 +9,12 @@ import {MatIconButton} from '@angular/material/button';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {MatTooltip} from '@angular/material/tooltip';
 import {LangService} from '../../services/lang/lang-service';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, ThemeToggleComponent, RouterLinkActive, Login, MatIcon, MatIconButton, MatMenu, MatMenuTrigger, MatTooltip, MatMenuItem],
+  imports: [RouterLink, ThemeToggleComponent, RouterLinkActive, Login, MatIcon, MatIconButton, MatMenu, MatMenuTrigger, MatTooltip, MatMenuItem, TranslatePipe],
   templateUrl: './header.component.html',
   styles: [`
     button {
@@ -30,10 +31,10 @@ export class HeaderComponent {
   langService = inject(LangService);
 
    navItems: [string, string][] = [
-    ["/", "Home"],
-    ["/portfolio", "Portfolio"],
-    ["/about", "About"],
-    ["/contact", "Contact"],
+    ["/", "navigation.home"],
+    ["/portfolio", "navigation.portfolio"],
+    ["/about", "navigation.about"],
+    ["/contact", "navigation.contact"],
   ];
 
   logotext = logotext;

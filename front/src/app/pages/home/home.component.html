@@ -1,19 +1,31 @@
 <section id="home" class="page-shell flex items-center min-h-screen">
   <div class="grid w-full items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
     <div class="order-2 space-y-6 lg:order-1">
-      <span class="eyebrow">Available for freelance work</span>
       <div class="space-y-4">
-        <h1 class="font-display text-4xl md:text-5xl">{{ introdata.title }}</h1>
-        <h2 class="fluidz-48 mb-1x text-5xl my-6">
-          <span class="text-[var(--color-error)]">{{ currentText() }}</span><span class="cursor-blink text-[var(--color-error)]">|</span>
-        </h2>
-        <p class="max-w-2xl text-base leading-7 text-[var(--text-muted)] md:text-lg">{{ introdata.description }}</p>
+        <h1 class="font-display text-4xl md:text-5xl">{{ 'home.title' | translate }}</h1>
+        @if (animatedTexts().length) {
+          <ngx-typed-js
+            [strings]="animatedTexts()"
+            [shuffle]="true"
+            [typeSpeed]="80"
+            [backSpeed]="50"
+            [backDelay]="1500"
+            [loop]="true"
+            [showCursor]="false"
+          >
+            <h2 class="fluidz-48 mb-1x text-5xl my-6">
+              <span class="typing text-[var(--color-error)]"></span>
+              <span class="cursor-blink text-[var(--color-error)]">|</span>
+            </h2>
+          </ngx-typed-js>
+        }
+        <p class="max-w-2xl text-base leading-7 text-[var(--text-muted)] md:text-lg">{{ 'home.description' | translate }}</p>
         <div class="flex flex-wrap gap-4">
           <a routerLink="/portfolio" class="primary-btn">
-              Mes projets
+            {{ 'home.button.project' | translate }}
           </a>
           <a [href]="links.cv" class="secondary-btn">
-                CV
+            {{ 'home.button.cv' | translate }}
             </a>
         </div>
       </div>

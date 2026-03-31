@@ -1,5 +1,29 @@
 {
+  "navigation": {
+    "home" : "Accueil",
+    "portfolio" : "Mes projets",
+    "about" : "A propos",
+    "contact" : "Contact"
+  },
+  "home": {
+    "title": "Je développe",
+    "animated": ["avec passion", "des applications variées", "des plugins JAVA"],
+    "description": "Développeur Full Stack passionné par le Web et le Gaming",
+    "button": {
+      "project": "Mes projets",
+      "cv": "CV"
+    }
+  },
   "about": {
-    "title": "bonjour"
+    "content": "Passionné de développement depuis plusieurs années, j'aime créer des applications web et mobiles modernes. Toujours curieux d'apprendre de nouvelles technologies, je m'investis dans chaque projet avec rigueur et créativité. J'apprécie autant le développement back-end que front-end, ce qui me permet d'avoir une vision complète des projets que je réalise.",
+    "work": {
+      "title": "Expériences"
+    },
+    "skill": {
+      "title": "Compétences"
+    }
+  },
+  "contact": {
+    "content": "Vous pouvez me contacter via mes réseaux ci-dessous \uD83D\uDC97"
   }
 }

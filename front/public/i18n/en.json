@@ -1,5 +1,29 @@
 {
+  "navigation": {
+    "home" : "Home",
+    "portfolio" : "Portofolio",
+    "about" : "About me",
+    "contact" : "Contact"
+  },
+  "home": {
+    "title": "I develop",
+    "animated": ["with passion", "various applications", "JAVA plugins"],
+    "description": "Full Stack Developer passionate about Web and Gaming",
+    "button": {
+      "project": "My projects",
+      "cv": "CV"
+    }
+  },
   "about": {
-    "title": "hello"
+    "content": "TO DO",
+    "work": {
+      "title": "Work Timeline"
+    },
+    "skill": {
+      "title": "Skills"
+    }
+  },
+  "contact": {
+    "content": "Vous pouvez me contacter via mes réseaux ci-dessous \uD83D\uDC97"
   }
 }

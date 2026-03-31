@@ -9,6 +9,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {RequesterService} from '../../services/requester/requester-service';
 import {ProjectAddEditForm} from '../../dialogs/project-add-edit/project-add-edit';
 import {AuthService} from '../../services/auth/auth-service';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-portfolio',
@@ -18,7 +19,8 @@ import {AuthService} from '../../services/auth/auth-service';
     Project,
     MatIcon,
     MatIconButton,
-    MatTooltip
+    MatTooltip,
+    TranslatePipe
   ],
   styleUrls: ['./portfolio.component.css']
 })
@@ -26,6 +28,7 @@ export class PortfolioComponent implements OnInit {
   private title = inject(Title);
   private metaService = inject(Meta);
   authService = inject(AuthService);
+  private translate = inject(TranslateService);
 
   projectData = input<any>(null)
 
@@ -38,7 +41,13 @@ export class PortfolioComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title.setTitle(`Portfolio | ${meta.title}`);
+    this.translate.stream('navigation.portfolio').subscribe(translated => {
+      this.title.setTitle(`${translated} | ${meta.title}`);
+    });
+
     this.metaService.updateTag({ name: 'description', content: meta.description });
+
   }
+
+  protected readonly meta = meta;
 }

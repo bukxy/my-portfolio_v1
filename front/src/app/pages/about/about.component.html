@@ -1,26 +1,24 @@
 <section class="page-shell">
   <header>
     <meta charSet="utf-8" />
-    <title>About | {meta.title}</title>
+    <title>{{ 'about.title' | translate }} | {{meta.title}}</title>
     <meta name="description" content={meta.description} />
   </header>
 
   <div class="mb-12">
-    <span class="eyebrow">About</span>
-    <h1 class="section-title">About me</h1>
+    <h1 class="section-title">{{ 'navigation.about' | translate }}</h1>
     <div class="section-divider"></div>
   </div>
 
   <div class="grid gap-6 lg:grid-cols-12">
     <div class="card-surface p-6 lg:col-span-5 md:p-8">
-      <h2 class="font-display text-2xl">{{dataabout.title}}</h2>
       @if (isLoaded()) {
-        <p class="mt-4 leading-7 text-[var(--text-muted)]">{{dataabout.aboutme}}</p>
+        <p class="leading-7 text-[var(--text-muted)]">{{ 'about.content' | translate }}</p>
       }
     </div>
 
     <div class="card-surface p-6 lg:col-span-7 md:p-8">
-      <h3 class="font-display text-2xl">Work Timeline</h3>
+      <h3 class="font-display text-2xl">{{ 'about.work.title' | translate }}</h3>
       <div class="mt-6 space-y-4">
         @if (isLoaded()) {
           @for (item of worktimeline; track $index) {

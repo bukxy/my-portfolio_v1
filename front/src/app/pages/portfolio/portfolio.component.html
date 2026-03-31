@@ -1,14 +1,13 @@
 <section class="page-shell">
   <header>
     <meta charSet="utf-8" />
-    <title>Portfolio | {meta.title}</title>
+    <title>{{ 'navigation.portfolio' | translate }}</title>
     <meta name="description" content={meta.description} />
   </header>
 
   <div class="mb-12">
-    <span class="eyebrow">Projects</span>
     <div class="flex items-center justify-between">
-      <h1 class="section-title">Portfolio</h1>
+      <h1 class="section-title">{{ 'navigation.portfolio' | translate }}</h1>
       @if (authService.isAuthenticated()) {
         <button mat-icon-button matTooltip="Ajouter" (click)="openAddEditDialog()">
           <mat-icon>add_circle</mat-icon>

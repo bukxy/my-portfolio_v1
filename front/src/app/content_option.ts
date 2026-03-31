@@ -1,7 +1,7 @@
 export const logotext = 'NICO';
 
 export const meta = {
-  title: 'Nicolas Peron | FullStack Developer',
+  title: 'Nicolas Peron',
   description: "Je suis Nicolas, développeur full Stack, dans la nouvelle-aquitaine",
 };
 
@@ -13,7 +13,7 @@ export const introdata = {
     'des plugins JAVA',
   ],
   description: 'Développeur Full Stack passionné par le Web et le Gaming',
-  your_img_url: 'https://images.unsplash.com/photo-1514790193030-c89d266d5a9d',
+  your_img_url: 'photo.JPG',
 };
 
 export const dataabout = {
