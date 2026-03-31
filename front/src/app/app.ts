@@ -8,10 +8,11 @@ import {Dialog} from '@angular/cdk/dialog';
 import {RequesterService} from './services/requester/requester-service';
 import {AuthService} from './services/auth/auth-service';
 import {NgScrollbarDocument, NgScrollbarModule} from 'ngx-scrollbar';
+import {PageLoader} from './components/page-loader/page-loader';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AnimatedCursorComponent, HeaderComponent, SocialIconsComponent, NgScrollbarModule],
+  imports: [RouterOutlet, AnimatedCursorComponent, HeaderComponent, SocialIconsComponent, NgScrollbarModule, PageLoader],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
