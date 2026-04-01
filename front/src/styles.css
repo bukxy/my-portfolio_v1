@@ -49,7 +49,7 @@ body {
 
 * {
   box-sizing: border-box;
-  /*cursor: none !important;*/
+  cursor: none !important;
 }
 
 a {
@@ -264,6 +264,25 @@ Icons CRUD
   }
   .lang-menu .mat-mdc-menu-item span {
     font-size: 1.4rem;
+  }
+
+  @media (pointer: coarse) {
+    ng-scrollbar {
+      display: none !important;
+    }
+
+    .ng-scrollbar-thumb,
+    .ng-scroll-track-list {
+      display: none !important;
+    }
+
+    .cursor-inner, .cursor-outer {
+      display: none !important;
+    }
+
+    * {
+      cursor: auto !important;
+    }
   }
 
 }

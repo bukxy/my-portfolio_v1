@@ -24,6 +24,8 @@ export class App implements OnInit{
   private authService = inject(AuthService);
   private request = inject(RequesterService);
 
+  isMobile = signal(window.matchMedia('(pointer: coarse)').matches);
+
   scrollbarDocument = inject(NgScrollbarDocument);
   constructor() {
     afterNextRender({
