@@ -33,6 +33,3 @@ build/
 ### VS Code ###
 .vscode/
 /public/
-
-src/main/resources/application.properties
-src/main/resources/application-dev.properties
