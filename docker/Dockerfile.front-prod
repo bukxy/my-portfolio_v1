@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Copie des dépendances en premier (cache Docker optimisé)
 COPY front/package*.json ./
-RUN npm ci
+RUN npm i
 
 # Copie du reste du code source
 COPY front/ .
