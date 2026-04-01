@@ -3,9 +3,7 @@ FROM maven:3.9-eclipse-temurin-21
 
 WORKDIR /app
 
-# Force la connexion MongoDB vers le conteneur mongo
-ENV SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/portfolio
-ENV SPRING_PROFILES_ACTIVE=dev
+ENV SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/portfolio
 
 # Cache des dépendances Maven
 COPY back/pom.xml .
