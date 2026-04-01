@@ -48,6 +48,13 @@
     thumb-min-size: 5px,
     track-offset: 5px,
   ));
+  @media (pointer: coarse) {
+    @include scrollbar.ng-scrollbar-overrides((
+      track-color: transparent,
+      thumb-color: transparent,
+    ));
+  }
+
   @include mat.chips-overrides((
     label-text-size: 0.75rem,
     container-shape-radius: var(--border-radius),
