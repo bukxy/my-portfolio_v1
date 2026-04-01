@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiURL: 'http://staging.mysite.com/api'
+  apiURL: 'https://api.peron-nicolas.com/api'
 };
