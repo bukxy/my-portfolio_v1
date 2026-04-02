@@ -1,14 +1,14 @@
-import {ApplicationConfig, provideBrowserGlobalErrorListeners} from '@angular/core';
-import {provideRouter} from '@angular/router';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideRouter } from '@angular/router';
 
-import {routes} from './app.routes';
-import {provideHttpClient, withInterceptors} from '@angular/common/http';
-import {AuthInterceptor} from './interceptors/auth-interceptor';
-import {Overlay} from '@angular/cdk/overlay';
-import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
-import {provideMarkdown} from 'ngx-markdown';
-import {provideTranslateService} from '@ngx-translate/core';
-import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
+import { routes } from './app.routes';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth-interceptor';
+import { Overlay } from '@angular/cdk/overlay';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { provideMarkdown } from 'ngx-markdown';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,18 +19,18 @@ export const appConfig: ApplicationConfig = {
     provideTranslateService({
       loader: provideTranslateHttpLoader({
         prefix: './i18n/',
-        suffix: '.json'
+        suffix: '.json',
       }),
       fallbackLang: 'fr',
-      lang: 'fr'
+      lang: 'fr',
     }),
     // provideZoneChangeDetection()
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useFactory: (overlay: Overlay) => ({
-        scrollStrategy: overlay.scrollStrategies.noop()
+        scrollStrategy: overlay.scrollStrategies.noop(),
       }),
-      deps: [Overlay]
+      deps: [Overlay],
     }
-  ]
+  ],
 };

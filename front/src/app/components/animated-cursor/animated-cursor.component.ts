@@ -45,7 +45,7 @@ export class AnimatedCursorComponent implements AfterViewInit {
       const inner = this.el.nativeElement.querySelector('.cursor-inner');
       const outer = this.el.nativeElement.querySelector('.cursor-outer');
 
-      [inner, outer].forEach(el => {
+      [inner, outer].forEach((el) => {
         document.body.appendChild(el);
         el.setAttribute('popover', 'manual');
         el.showPopover();
