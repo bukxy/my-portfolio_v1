@@ -5,7 +5,7 @@
       <ng-container *ngTemplateOutlet="content"></ng-container>
     </div>
   } @else {
-    <ng-scrollbar style="height: 100%;">
+    <ng-scrollbar style="height: calc(100vh - 80px)">
       <ng-container *ngTemplateOutlet="content"></ng-container>
     </ng-scrollbar>
   }
