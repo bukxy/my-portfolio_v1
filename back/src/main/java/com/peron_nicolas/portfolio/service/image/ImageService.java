@@ -49,7 +49,6 @@ public class ImageService implements ImageServiceInterface {
     @Override
     @Transactional
     public void deleteByEntityTypeAndEntityId(EntityTypeEnum entityTypeEnum, Long entityId) {
-        System.out.println("DELETE");
         imageRepository.deleteByEntityTypeAndEntityId(entityTypeEnum, entityId);
     }
 }

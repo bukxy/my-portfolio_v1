@@ -33,6 +33,8 @@ services:
       - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
       - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
       - JWT_SECRET=${JWT_SECRET}
+    volumes:
+      - /home/ubuntu/my-portfolio_v1/back/public/uploads:/app/public/uploads # Folder file uploads
     networks:
       - portfolio-net
     depends_on:

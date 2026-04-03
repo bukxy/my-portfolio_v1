@@ -1,6 +1,18 @@
 <div class="flex flex-col bg-[var(--bg-color)] border-1 border-[var(--border-color)] rounded-[var(--border-radius)]">
-  <ng-scrollbar style="height: calc(100vh - 80px)">
 
+  @if (isMobile()) {
+    <div style="overflow-y: auto; height: calc(100vh - 80px)">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </div>
+  } @else {
+    <ng-scrollbar style="height: calc(100vh - 80px)">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </ng-scrollbar>
+  }
+
+</div>
+
+<ng-template #content>
     @if (data.images?.length) {
       <div class="relative h-96 flex-shrink-0 overflow-hidden">
         <img
@@ -69,7 +81,7 @@
       <!-- Infos -->
       <div class="flex flex-wrap gap-3">
         @if (data.date_start) {
-          <span class="eyebrow">{{ data.date_start }} → {{ data.date_end ?? 'En cours' }}</span>
+          <span class="eyebrow">{{ data.date_start | date:'MM/yyyy' }} → {{ data.date_end ? (data.date_end | date:'MM/yyyy') : 'En cours' }}</span>
         }
         @if (data.is_github) {
           <span class="eyebrow">GitHub</span>
@@ -96,7 +108,4 @@
         <button mat-flat-button mat-dialog-close>{{ 'button.close' | translate }}</button>
       </div>
     </div>
-
-  </ng-scrollbar>
-</div>
-
+</ng-template>
