@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogClose } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { MarkdownComponent } from 'ngx-markdown';
 import { MatButton, MatIconButton } from '@angular/material/button';
-import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { DatePipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -19,6 +19,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     NgScrollbar,
     TranslatePipe,
     NgTemplateOutlet,
+    DatePipe,
   ],
   templateUrl: './project-get.html',
   styleUrl: './project-get.css',

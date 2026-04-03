@@ -81,7 +81,7 @@
       <!-- Infos -->
       <div class="flex flex-wrap gap-3">
         @if (data.date_start) {
-          <span class="eyebrow">{{ data.date_start }} → {{ data.date_end ?? 'En cours' }}</span>
+          <span class="eyebrow">{{ data.date_start | date:'MM/yyyy' }} → {{ data.date_end ? (data.date_end | date:'MM/yyyy') : 'En cours' }}</span>
         }
         @if (data.is_github) {
           <span class="eyebrow">GitHub</span>
