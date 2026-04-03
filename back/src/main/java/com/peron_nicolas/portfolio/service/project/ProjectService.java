@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -64,12 +66,19 @@ public class ProjectService implements ProjectServiceInterface {
         String apiUrl = "https://api.github.com/repos/" + repo + "/readme";
 
         try {
-            return restClient.get()
+            Map response = restClient.get()
                     .uri(apiUrl)
-                    .header("Accept", "application/vnd.github.raw+json")
+                    .header("Accept", "application/vnd.github+json")
                     .retrieve()
-                    .body(String.class);
+                    .body(Map.class);
+
+            if (response != null && response.get("content") != null) {
+                String encoded = ((String) response.get("content")).replaceAll("\\s", "");
+                return new String(Base64.getDecoder().decode(encoded));
+            }
+            return null;
         } catch (Exception e) {
+            log.error("fetchReadme error: {}", e.getMessage(), e);
             return null;
         }
     }
