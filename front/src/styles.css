@@ -248,6 +248,29 @@ Icons CRUD
     text-decoration: none !important;
   }
 
+  markdown table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+  }
+
+  markdown th,
+  markdown td {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    color: var(--text-color);
+  }
+
+  markdown th {
+    background: var(--surface-elevated);
+    font-weight: 600;
+  }
+
+  markdown tr:hover td {
+    background: var(--surface-elevated);
+  }
+
   .lang-menu {
     margin-left: -3px;
   }
