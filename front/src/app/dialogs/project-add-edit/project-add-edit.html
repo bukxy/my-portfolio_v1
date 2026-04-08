@@ -1,5 +1,18 @@
-<!-- project-add-edit.html -->
 <div class="flex min-h-full flex-col justify-center px-6 py-12 bg-[var(--bg-color)] border-1 border-[var(--border-color)] rounded-[var(--border-radius)]">
+  @if (isMobile()) {
+    <div style="overflow-y: auto; height: calc(100vh - 80px)">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </div>
+  } @else {
+    <ng-scrollbar style="height: calc(100vh - 80px)">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </ng-scrollbar>
+  }
+
+</div>
+
+<ng-template #content>
+
   <div class="sm:mx-auto sm:w-full sm:max-w-lg">
     <h2 class="text-center text-2xl/9 font-bold tracking-tight text-[var(--text-color)]">
       {{ isEdit ? 'Modifier le projet' : 'Ajouter un projet' }}
@@ -123,6 +136,25 @@
         </div>
       }
 
+      <mat-form-field>
+        <mat-label>Category
+          @if (backendErrors()['category']) {
+            <mat-icon
+              #tooltip="matTooltip"
+              matTooltip="{{ backendErrors()['category'] }}"
+              class="error-icon"
+            >
+              info
+            </mat-icon>
+          }
+        </mat-label>
+        <mat-select formControlName="category">
+          @for (category of listCategories(); track category) {
+            <mat-option [value]="category.id">{{category.name}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
       <app-chips-list
         formControlName="skill_ids"
         label="Skills"
@@ -152,4 +184,4 @@
 
     </form>
   </div>
-</div>
+</ng-template>
