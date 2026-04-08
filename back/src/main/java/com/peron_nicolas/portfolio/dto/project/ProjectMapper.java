@@ -2,6 +2,7 @@ package com.peron_nicolas.portfolio.dto.project;
 
 import com.peron_nicolas.portfolio.dto.image.ImageMapper;
 import com.peron_nicolas.portfolio.dto.skill.SkillDTO;
+import com.peron_nicolas.portfolio.entity.Category;
 import com.peron_nicolas.portfolio.entity.Image;
 import com.peron_nicolas.portfolio.entity.Project;
 import com.peron_nicolas.portfolio.entity.Skill;
@@ -19,13 +20,13 @@ public class ProjectMapper {
     private final ImageMapper imageMapper;
     private final ImageServiceInterface imageServiceInterface;
 
-    public Project toEntity(ProjectCreateDTO dto, List<Skill> skills) {
-        Project project = new Project(dto.name(), dto.url(), dto.isGithub(), dto.description(), dto.shortDescription(), dto.dateStart(), dto.dateEnd());
+    public Project toEntity(ProjectCreateDTO dto, List<Skill> skills, Category category) {
+        Project project = new Project(dto.name(), dto.url(), dto.isGithub(), dto.description(), dto.shortDescription(), dto.dateStart(), dto.dateEnd(), category);
         project.setSkills(skills);
         return project;
     }
 
-    public Project toEntity(ProjectCreateDTO dto, Project p, List<Skill> skills) {
+    public Project toEntity(ProjectCreateDTO dto, Project p, List<Skill> skills, Category category) {
         p.setName(dto.name());
         p.setUrl(dto.url());
         p.setIsGithub(dto.isGithub());
@@ -33,6 +34,7 @@ public class ProjectMapper {
         p.setShortDescription(dto.shortDescription());
         p.setDateStart(dto.dateStart());
         p.setDateEnd(dto.dateEnd());
+        p.setCategory(category);
         p.setSkills(skills);
         return p;
     }
@@ -47,6 +49,7 @@ public class ProjectMapper {
                 p.getShortDescription(),
                 p.getDateStart(),
                 p.getDateEnd(),
+                p.getCategory(),
                 imageMapper.toDto(images),
                 p.getSkills().stream()
                         .map(s -> new SkillDTO(s.getId(), s.getName(), s.getPercentage()))

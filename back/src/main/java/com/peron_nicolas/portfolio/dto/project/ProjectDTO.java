@@ -2,6 +2,7 @@ package com.peron_nicolas.portfolio.dto.project;
 
 import com.peron_nicolas.portfolio.dto.image.ImageDTO;
 import com.peron_nicolas.portfolio.dto.skill.SkillDTO;
+import com.peron_nicolas.portfolio.entity.Category;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -31,6 +32,9 @@ public record ProjectDTO(
     LocalDate dateStart,
 
     LocalDate dateEnd,
+
+    @NotNull(message = "Category is requires")
+    Category category,
 
     List<ImageDTO> images,
 
