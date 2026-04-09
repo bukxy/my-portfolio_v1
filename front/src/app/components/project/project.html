@@ -9,7 +9,13 @@
           {{item.name}}
           <mat-chip-set>
             @if (item.date_start) {
-              <mat-chip>{{ item.date_start | date:'yyyy' }} → {{ item.date_end ? (item.date_end | date:'yyyy') : ('project.date_end' | translate) }}</mat-chip>
+              <mat-chip>
+                @if ((item.date_start | date:'yyyy') === (item.date_end | date:'yyyy')) {
+                  {{ item.date_start | date:'yyyy' }}
+                } @else {
+                  {{ item.date_start | date:'yyyy' }} → {{ item.date_end ? (item.date_end | date:'yyyy') : ('project.date_end' | translate) }}
+                }
+                </mat-chip>
             }
           </mat-chip-set>
         </p>

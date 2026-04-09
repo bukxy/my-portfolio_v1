@@ -106,6 +106,7 @@ public class ProjectResource {
     }
 
     @PutMapping(path="/{id}", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    @Transactional
     public ResponseEntity<?> edit(@PathVariable Long id, @Valid @RequestPart("data") ProjectCreateDTO request, @RequestPart(value = "images", required = false) List<MultipartFile> images) {
         List<Skill> skills = request.skillIds() != null
                 ? skillServiceInterface.findAllByIds(request.skillIds())
@@ -113,7 +114,7 @@ public class ProjectResource {
 
         Category category = categoryServiceInterface.getById(request.category());
 
-        Project p = projectMapper.toEntity(request, skills, category);
+        Project p = projectMapper.toEntity(request, projectServiceInterface.getById(id), skills, category);
         Project project = projectServiceInterface.save(p);
 
         List<Image> savedImages = new ArrayList<>();
