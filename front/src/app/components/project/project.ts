@@ -1,25 +1,18 @@
-import {Component, inject, input, OnInit, signal} from '@angular/core';
-import {AuthService} from '../../services/auth/auth-service';
-import {ProjectInterface, ProjectsInterface} from '../../interfaces/project-interface';
-import {ProjectService} from '../../services/project/project-service';
-import {ProjectAddEditDialog} from '../../dialogs/project-add-edit/project-add-edit';
-import {MatDialog} from '@angular/material/dialog';
-import {ProjectGet} from '../../dialogs/project-get/project-get';
-import {MatChip, MatChipSet} from '@angular/material/chips';
-import {DatePipe} from '@angular/common';
-import {MatTooltip} from '@angular/material/tooltip';
-import {TranslatePipe} from '@ngx-translate/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { AuthService } from '../../services/auth/auth-service';
+import { ProjectInterface, ProjectsInterface } from '../../interfaces/project-interface';
+import { ProjectService } from '../../services/project/project-service';
+import { ProjectAddEditDialog } from '../../dialogs/project-add-edit/project-add-edit';
+import { MatDialog } from '@angular/material/dialog';
+import { ProjectGet } from '../../dialogs/project-get/project-get';
+import { MatChip, MatChipSet } from '@angular/material/chips';
+import { DatePipe } from '@angular/common';
+import { MatTooltip } from '@angular/material/tooltip';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-project',
-  imports: [
-    ProjectAddEditDialog,
-    MatChip,
-    MatChipSet,
-    DatePipe,
-    MatTooltip,
-    TranslatePipe,
-  ],
+  imports: [ProjectAddEditDialog, MatChip, MatChipSet, DatePipe, MatTooltip, TranslatePipe],
   templateUrl: './project.html',
 })
 export class Project implements OnInit {
@@ -31,7 +24,7 @@ export class Project implements OnInit {
   projects = signal<ProjectsInterface>([]);
   isLoaded = signal(false);
 
-  projectData = input<any>(null)
+  projectData = input<any>(null);
 
   openProject(project: ProjectInterface): void {
     this.dialog.open(ProjectGet, {
@@ -44,15 +37,17 @@ export class Project implements OnInit {
   }
 
   ngOnInit() {
-    this.loadProjects();
-
     this.projectService.onRefresh$.subscribe(() => {
       this.loadProjects();
     });
+
+    this.projectService.getFilters().subscribe((filters) => {
+      this.loadProjects(filters);
+    });
   }
 
-  loadProjects() {
-    this.projectService.getAll().subscribe(projects => {
+  loadProjects(filters?: any) {
+    this.projectService.getAll(filters).subscribe((projects) => {
       this.projects.set(projects);
       this.isLoaded.set(true);
     });

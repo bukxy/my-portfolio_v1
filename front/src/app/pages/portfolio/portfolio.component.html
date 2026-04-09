@@ -15,6 +15,31 @@
       }
     </div>
     <div class="section-divider"></div>
+    <div class="flex items-center gap-4 mt-5">
+      <mat-form-field class="flex-1">
+        <mat-label>{{ 'project.filter.category' | translate }}</mat-label>
+        <mat-select multiple
+                    [value]="filters().categoryIds ?? []"
+                    (selectionChange)="onCategoryFilterChange($event.value)"
+        >
+          @for (category of categories(); track category.id) {
+            <mat-option [value]="category.id">{{ 'project.filter.category_list.' + category.name | translate }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="flex-1">
+        <mat-label>{{ 'project.filter.technology' | translate }}</mat-label>
+        <mat-select multiple
+                    [value]="filters().skillIds ?? []"
+                    (selectionChange)="onSkillFilterChange($event.value)"
+        >
+          @for (skill of skills(); track skill.id) {
+            <mat-option [value]="skill.id">{{ skill.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
 
   <app-project></app-project>

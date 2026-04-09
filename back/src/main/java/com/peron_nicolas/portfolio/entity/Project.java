@@ -39,6 +39,10 @@ public class Project {
 
     private LocalDate dateEnd;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     @ManyToMany
     @JoinTable(name = "project_skill",
             joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"),
@@ -46,7 +50,7 @@ public class Project {
                     referencedColumnName = "id"))
     private List<Skill> skills = new ArrayList<>();
 
-    public Project(String name, String url, Boolean isGithub, String description, String shortDescription, LocalDate dateStart, LocalDate dateEnd){
+    public Project(String name, String url, Boolean isGithub, String description, String shortDescription, LocalDate dateStart, LocalDate dateEnd, Category category){
         this.name = name;
         this.url = url;
         this.isGithub = isGithub;
@@ -54,6 +58,7 @@ public class Project {
         this.shortDescription = shortDescription;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
+        this.category = category;
     }
 
     public Project() {}

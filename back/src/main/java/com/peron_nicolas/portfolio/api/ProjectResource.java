@@ -2,11 +2,13 @@ package com.peron_nicolas.portfolio.api;
 
 import com.peron_nicolas.portfolio.dto.project.ProjectCreateDTO;
 import com.peron_nicolas.portfolio.dto.project.ProjectMapper;
+import com.peron_nicolas.portfolio.entity.Category;
 import com.peron_nicolas.portfolio.entity.Image;
 import com.peron_nicolas.portfolio.entity.Project;
 import com.peron_nicolas.portfolio.entity.Skill;
 import com.peron_nicolas.portfolio.enums.EntityTypeEnum;
 import com.peron_nicolas.portfolio.service.FileSystemStorage.FileSystemStorageServiceInterface;
+import com.peron_nicolas.portfolio.service.category.CategoryServiceInterface;
 import com.peron_nicolas.portfolio.service.image.ImageServiceInterface;
 import com.peron_nicolas.portfolio.service.project.ProjectServiceInterface;
 import com.peron_nicolas.portfolio.service.skill.SkillServiceInterface;
@@ -47,15 +49,19 @@ public class ProjectResource {
     private final FileSystemStorageServiceInterface fileSystemStorageServiceInterface;
     private final ImageServiceInterface imageServiceInterface;
     private final SkillServiceInterface skillServiceInterface;
+    private final CategoryServiceInterface categoryServiceInterface;
 
     @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    @Transactional
     public ResponseEntity<?> save(@Valid @RequestPart("data") ProjectCreateDTO request, @RequestPart(value = "images", required = false) List<MultipartFile> images){
 
         List<Skill> skills = request.skillIds() != null
                 ? skillServiceInterface.findAllByIds(request.skillIds())
                 : new ArrayList<>();
 
-        Project p = projectMapper.toEntity(request, skills);
+        Category category = categoryServiceInterface.getById(request.category());
+
+        Project p = projectMapper.toEntity(request, skills, category);
         Project project = projectServiceInterface.save(p);
 
         List<Image> savedImages = new ArrayList<>();
@@ -74,8 +80,11 @@ public class ProjectResource {
 
     @GetMapping
     @Transactional
-    public ResponseEntity<?> list() {
-        List<Project> projects = projectServiceInterface.findAll();
+    public ResponseEntity<?> list(
+            @RequestParam(required = false) List<Long> categoryIds,
+            @RequestParam(required = false) List<Long> skillIds
+    ) {
+        List<Project> projects = projectServiceInterface.findWithFilters(categoryIds, skillIds);
         List<Image> images = imageServiceInterface.findByEntityType(EntityTypeEnum.PROJECT);
 
         return messageTool.res(HttpStatus.OK,
@@ -102,7 +111,9 @@ public class ProjectResource {
                 ? skillServiceInterface.findAllByIds(request.skillIds())
                 : new ArrayList<>();
 
-        Project p = projectMapper.toEntity(request, projectServiceInterface.getById(id), skills);
+        Category category = categoryServiceInterface.getById(request.category());
+
+        Project p = projectMapper.toEntity(request, skills, category);
         Project project = projectServiceInterface.save(p);
 
         List<Image> savedImages = new ArrayList<>();

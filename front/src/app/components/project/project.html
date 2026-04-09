@@ -1,5 +1,5 @@
 <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-  @for (item of projects(); track $index) {
+  @for (item of projects(); track item.id) {
     <article [accessKey]="$index" class="card-surface overflow-hidden flex flex-col">
       @if (item.images.length) {
         <img [src]="item.images[0].path" alt="alt" class="h-64 w-full object-cover grayscale hover:grayscale-0 transition-all duration-300" />

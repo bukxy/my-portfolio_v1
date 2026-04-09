@@ -1,9 +1,13 @@
 import {inject, Injectable} from '@angular/core';
-import {map, Subject} from 'rxjs';
+import { BehaviorSubject, map, Observable, Subject } from 'rxjs';
 import {DataModel} from '../../interfaces/data-model-interface';
 import {FormGroup} from '@angular/forms';
 import {RequesterService} from '../requester/requester-service';
-import {ProjectInterface, ProjectsInterface} from '../../interfaces/project-interface';
+import {
+  ProjectFilter,
+  ProjectInterface,
+  ProjectsInterface,
+} from '../../interfaces/project-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,14 +18,28 @@ export class ProjectService {
 
   readonly request = inject(RequesterService);
 
+  private filters$ = new BehaviorSubject<ProjectFilter>({});
+
+  setFilters(filters: ProjectFilter) {
+    this.filters$.next(filters);
+  }
+
+  getFilters() {
+    return this.filters$.asObservable();
+  }
+
   triggerRefresh() {
     this.refresh$.next();
   }
 
-  getAll() {
-    return this.request.get<DataModel<ProjectsInterface>>('project').pipe(
-      map(res => res.data)
-    )
+  getAll(filters?: ProjectFilter): Observable<ProjectInterface[]> {
+    const params: any = {};
+    if (filters?.categoryIds?.length) params['categoryIds'] = filters.categoryIds;
+    if (filters?.skillIds?.length) params['skillIds'] = filters.skillIds;
+
+    return this.request
+      .get<DataModel<ProjectsInterface>>('project', params)
+      .pipe(map((res) => res.data));
   }
 
   add(formGroup: FormGroup) {

@@ -46,23 +46,25 @@ export class App implements OnInit {
   ngOnInit() {
     // Curseur au-dessus de tous les overlays
     setTimeout(() => {
-      const overlayContainer = document.querySelector('.cdk-overlay-container');
+      const refresh = () => {
+        const inner = document.querySelector('.cursor-inner') as any;
+        const outer = document.querySelector('.cursor-outer') as any;
+        inner?.hidePopover?.();
+        outer?.hidePopover?.();
+        inner?.showPopover?.();
+        outer?.showPopover?.();
+      };
 
-      if (overlayContainer) {
-        const observer = new MutationObserver((mutations) => {
-          setTimeout(() => {
-            const inner = document.querySelector('.cursor-inner') as any;
-            const outer = document.querySelector('.cursor-outer') as any;
-            inner?.hidePopover?.();
-            outer?.hidePopover?.();
-            inner?.showPopover?.();
-            outer?.showPopover?.();
-          }, 0);
-        });
+      const observer = new MutationObserver(() => {
+        observer.disconnect();
+        setTimeout(() => {
+          refresh();
+          observer.observe(document.body, { childList: true, subtree: true });
+        }, 150);
+      });
 
-        observer.observe(overlayContainer, { childList: true, subtree: false });
-      }
-    }, 500); // attend que le DOM soit prêt
+      observer.observe(document.body, { childList: true, subtree: true });
+    }, 500);
 
     // Besoin pour remettre le cursor au dessus des dialog --'
     this.dialog.afterOpened.subscribe(() => {

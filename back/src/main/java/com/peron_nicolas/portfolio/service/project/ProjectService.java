@@ -40,8 +40,8 @@ public class ProjectService implements ProjectServiceInterface {
 
     @Override
     @Transactional
-    public List<Project> findAll() {
-        return projectRepository.findAll();
+    public List<Project> findWithFilters(List<Long> categoryIds, List<Long> skillIds) {
+        return projectRepository.findWithFilters(categoryIds, skillIds);
     }
 
     @Override

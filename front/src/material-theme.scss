@@ -88,6 +88,25 @@
     selected-hover-handle-color: var(--secondary-color),
     selected-focus-handle-color: var(--secondary-color),
   ));
+
+  @include mat.select-overrides((
+    panel-background-color: var(--surface-color),
+    enabled-trigger-text-color: var(--text-color),
+    placeholder-text-color: var(--text-muted),
+    enabled-arrow-color: var(--text-muted),
+    focused-arrow-color: var(--accent-color),
+  ));
+
+  @include mat.option-overrides((
+    label-text-color: var(--text-color),
+    selected-state-label-text-color: var(--accent-color),
+    selected-state-layer-color: var(--accent-color),
+    hover-state-layer-color: var(--surface-elevated),
+  ));
+
+  @include mat.form-field-overrides((
+    container-height: 48px
+  ));
 }
 
 .cdk-overlay-pane.mat-mdc-dialog-panel {
@@ -212,6 +231,20 @@ mat-snack-bar-container {
   &:hover {
     background: var(--surface-elevated) !important;
   }
+}
+
+.mat-mdc-select-panel {
+  background: var(--surface-color) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) {
+  background: var(--surface-elevated) !important;
+}
+
+.mat-pseudo-checkbox-checked {
+  background-color: var(--accent-color) !important;
 }
 
 //html {

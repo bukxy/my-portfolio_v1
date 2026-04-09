@@ -88,6 +88,7 @@ public class WebSecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/skill/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/experience/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/about/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/category/**").permitAll()
 
                                 .requestMatchers("/uploads/**").permitAll()
 

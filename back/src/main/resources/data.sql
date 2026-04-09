@@ -10,3 +10,7 @@ INSERT INTO SKILL (name, percentage) VALUES
 ('SQL', 80),
 ('Linux', 70),
 ('Docker', 70);
+
+INSERT INTO CATEGORY (name) VALUES
+('Web'),
+('Game');
