@@ -121,6 +121,10 @@ export class ProjectAddEditForm {
       next: ({ skills, categories }) => {
         this.listSkill.set(skills);
         this.listCategories.set(categories);
+
+        this.projectFormGroup.patchValue({
+          category: this.data?.category?.id || null
+        });
       },
       // error: (err) => console.log(err),
     });
@@ -166,6 +170,10 @@ export class ProjectAddEditForm {
       this.projectService.update(this.data.id, this.projectFormGroup).subscribe({
         next: (res) => {
           this.snackBar.showSuccessMessage(res.message);
+          this.projectFormGroup.patchValue({
+            skill_ids: res.data.skills,
+            category: res.data.category?.id,
+          });
           this.projectService.triggerRefresh();
         },
         error: (err) => this.backendErrors.set(err.error.errors ?? {}),
