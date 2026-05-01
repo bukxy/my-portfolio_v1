@@ -49,5 +49,5 @@ export const socialprofils = [
 ];
 
 export const links = {
-  cv: 'https://drive.google.com/file/d/1OJwEd3s9ZzwS8V7Aw2nEtV1xZ33pVYZA/view?usp=sharing',
+  cv: 'https://drive.google.com/file/d/1XRceRfGL8nqVpS-8azCqZ0JOJwcGTklf/view?usp=sharing',
 };
